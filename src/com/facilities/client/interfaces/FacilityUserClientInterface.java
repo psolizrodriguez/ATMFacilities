@@ -1,6 +1,6 @@
 package com.facilities.client.interfaces;
 
-public interface FacilityUseClientInterface {
+public interface FacilityUserClientInterface {
 	public Object isInUseDuringInterval();
 	public Object assignFacilityToUse();
 	public Object vacateFacility();
