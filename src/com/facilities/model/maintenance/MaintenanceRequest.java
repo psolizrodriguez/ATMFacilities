@@ -1,5 +1,5 @@
 package com.facilities.model.maintenance;
 
-public class Upgrade extends MaintenanceType {
+public class MaintenanceRequest {
 
 }

@@ -1,5 +1,5 @@
 package com.facilities.model.maintenance;
 
-public class Diagnostic extends Maintenance {
+public class Diagnostic extends MaintenanceType {
 
 }

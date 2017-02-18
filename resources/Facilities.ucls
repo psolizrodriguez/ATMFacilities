@@ -117,8 +117,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="com.facilities.model.maintenance.Maintenance" project="COMP473P1_Facilities" 
-    file="/COMP473P1_Facilities/src/com/facilities/model/maintenance/Maintenance.java" binary="false" 
+  <class id="13" language="java" name="com.facilities.model.maintenance.MaintenanceType" project="COMP473P1_Facilities" 
+    file="/COMP473P1_Facilities/src/com/facilities/model/maintenance/MaintenanceType.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1295" y="358"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -127,9 +127,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="14" language="java" name="com.facilities.model.maintenance.MaintenanceSchedule" 
-    project="COMP473P1_Facilities" 
-    file="/COMP473P1_Facilities/src/com/facilities/model/maintenance/MaintenanceSchedule.java" binary="false" 
+  <class id="14" language="java" name="com.facilities.model.maintenance.Maintenance" project="COMP473P1_Facilities" 
+    file="/COMP473P1_Facilities/src/com/facilities/model/maintenance/Maintenance.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1297" y="154"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
