@@ -1,19 +1,72 @@
 package com.facilities.model.atm;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import com.facilities.model.customer.Address;
 import com.facilities.model.service.ATMTransaction;
 
 public class ATM {
-	private List<ATMTransaction> accounts = new ArrayList<ATMTransaction>();
+	private String atmId;
+	private Double limit;
+	private Double currentAmount;
+	private boolean active;
+	private List<ATMTransaction> atmTransactions;
+	private Address address;
 
-	public List<ATMTransaction> getAccounts() {
-		return accounts;
+	public ATM(String atmId, Double limit, Double currentAmount, boolean active, Address address) {
+		this.atmId = atmId;
+		this.limit = limit;
+		this.currentAmount = currentAmount;
+		this.active = active;
+		this.address = address;
 	}
 
-	public void setAccounts(List<ATMTransaction> accounts) {
-		this.accounts = accounts;
+	public Double getLimit() {
+		return limit;
+	}
+
+	public void setLimit(Double limit) {
+		this.limit = limit;
+	}
+
+	public Double getCurrentAmount() {
+		return currentAmount;
+	}
+
+	public void setCurrentAmount(Double currentAmount) {
+		this.currentAmount = currentAmount;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public String getAtmId() {
+		return atmId;
+	}
+
+	public void setAtmId(String atmId) {
+		this.atmId = atmId;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public List<ATMTransaction> getAtmTransactions() {
+		return atmTransactions;
+	}
+
+	public void setAtmTransactions(List<ATMTransaction> atmTransactions) {
+		this.atmTransactions = atmTransactions;
 	}
 
 }
