@@ -10,7 +10,7 @@ public class Customer {
 	private Address billingAddress;
 	private Address shippingAddress;
 	private List<Account> accounts = new ArrayList<Account>();
-	private List<DebitCard> debitCards = new ArrayList<DebitCard>();
+	private List<Card> debitCards = new ArrayList<Card>();
 
 	public List<Account> getAccounts() {
 		return accounts;
@@ -20,11 +20,11 @@ public class Customer {
 		this.accounts = accounts;
 	}
 
-	public List<DebitCard> getDebitCards() {
+	public List<Card> getDebitCards() {
 		return debitCards;
 	}
 
-	public void setDebitCards(List<DebitCard> debitCards) {
+	public void setDebitCards(List<Card> debitCards) {
 		this.debitCards = debitCards;
 	}
 

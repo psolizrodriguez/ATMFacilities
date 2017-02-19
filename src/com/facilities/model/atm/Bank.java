@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.facilities.model.customer.Customer;
-import com.facilities.model.customer.DebitCard;
+import com.facilities.model.customer.Card;
 
 public class Bank {
 	private List<ATM> atms = new ArrayList<ATM>();
-	private List<DebitCard> debitCards = new ArrayList<DebitCard>();
+	private List<Card> debitCards = new ArrayList<Card>();
 	private List<Customer> customers = new ArrayList<Customer>();
 
 	public List<Customer> getCustomers() {
@@ -19,11 +19,11 @@ public class Bank {
 		this.customers = customers;
 	}
 
-	public List<DebitCard> getDebitCards() {
+	public List<Card> getDebitCards() {
 		return debitCards;
 	}
 
-	public void setDebitCards(List<DebitCard> debitCards) {
+	public void setDebitCards(List<Card> debitCards) {
 		this.debitCards = debitCards;
 	}
 

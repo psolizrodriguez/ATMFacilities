@@ -3,6 +3,7 @@ package com.facilities.model.atm;
 import java.util.List;
 
 import com.facilities.model.customer.Address;
+import com.facilities.model.maintenance.Maintenance;
 import com.facilities.model.service.ATMTransaction;
 
 public class ATM {
@@ -69,4 +70,7 @@ public class ATM {
 		this.atmTransactions = atmTransactions;
 	}
 
+	public boolean performTransaction(ATMTransaction aTMTransaction) {
+		return aTMTransaction.processTransaction(this);
+	}
 }
