@@ -6,11 +6,21 @@ public class BankLoader {
 	private Bank bankPNC;
 	private Bank bankOfAmerica;
 	private Bank bankCitibank;
+	private Bank chaseBank;
+
+	public Bank getChaseBank() {
+		return chaseBank;
+	}
+
+	public void setChaseBank(Bank chaseBank) {
+		this.chaseBank = chaseBank;
+	}
 
 	public BankLoader() {
 		bankPNC = new Bank();
 		bankOfAmerica = new Bank();
 		bankCitibank = new Bank();
+		chaseBank = new Bank();
 	}
 
 	public Bank getBankPNC() {
