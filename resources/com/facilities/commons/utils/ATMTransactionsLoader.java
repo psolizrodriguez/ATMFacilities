@@ -26,11 +26,11 @@ public class ATMTransactionsLoader {
 				CommonsUtils.getCalendar(02, 18, 2017, 11, 50, 0), 1000.0);
 		facilityClientInterface.addFacilityDetail(atmPNC_001, depositToAccount);
 		ATMTransaction withdrawFromAccount = new WithdrawlTransaction(checkingAccount, debitCard,
-				CommonsUtils.getCalendar(02, 18, 2017, 12, 01, 0), 500.0);
+				CommonsUtils.getCalendar(02, 18, 2017, 11, 58, 0), 500.0);
 		facilityClientInterface.addFacilityDetail(atmPNC_001, withdrawFromAccount);
 		Account savingAccount = debitCard.getAccounts().get(1);
 		ATMTransaction transferFromAccount = new TransferTransaction(checkingAccount, debitCard,
-				CommonsUtils.getCalendar(02, 18, 2017, 12, 10, 0), 300.0, savingAccount);
+				CommonsUtils.getCalendar(02, 18, 2017, 11, 59, 0), 300.0, savingAccount);
 		facilityClientInterface.addFacilityDetail(atmPNC_001, transferFromAccount);
 	}
 }

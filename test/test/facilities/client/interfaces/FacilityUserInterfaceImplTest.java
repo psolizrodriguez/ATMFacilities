@@ -16,6 +16,7 @@ import com.facilities.model.atm.ATM;
 import com.facilities.model.customer.Account;
 import com.facilities.model.customer.Card;
 import com.facilities.model.service.ATMTransaction;
+import com.facilities.model.service.DepositTransaction;
 import com.facilities.model.service.WithdrawlTransaction;
 
 public class FacilityUserInterfaceImplTest {
@@ -57,6 +58,24 @@ public class FacilityUserInterfaceImplTest {
 	@Test
 	public void vacateFacility() {
 		//Need to make a test case where you have the ATM active and then perform a transaction
+		ATM atmPNC_001 = bankLoader.getBankPNC().getAtms().get(0);
+		System.out.println("@Test assignFacilityToUse for ATM PNC_001");
+		assertEquals(atmPNC_001.isActive(), true);
+		System.out.println("ATM PNC_001 is active");
+		Card debitCard = bankLoader.getBankPNC().getDebitCards().get(0);
+		Account checkingAccount = debitCard.getAccounts().get(0);
+		ATMTransaction withdrawFromAccount = new WithdrawlTransaction(checkingAccount, debitCard,
+				CommonsUtils.getCalendar(02, 18, 2017, 13, 20, 0), 10.0);
+		assertEquals(facilityUserInterface.assignFacilityToUse(atmPNC_001, withdrawFromAccount), true);
+		System.out.println("ATM PNC_001 is doing a withdrawFromAccount Transaction");
+		assertEquals(facilityUserInterface.vacateFacility(atmPNC_001), true);
+		System.out.println("ATM PNC_001 is vacating");
+		System.out.println("ATM PNC_001 is trying to do depositToAccount Transaction");
+		ATMTransaction depositToAccount = new DepositTransaction(checkingAccount, debitCard,
+				CommonsUtils.getCalendar(02, 18, 2017, 13, 20, 0), 10.0);
+		assertEquals(facilityUserInterface.assignFacilityToUse(atmPNC_001, depositToAccount), false);
+
+		System.out.println("ATM PNC_001 depositToAccount Transaction returns false");
 	}
 
 	@Test
@@ -69,12 +88,16 @@ public class FacilityUserInterfaceImplTest {
 		ATM atmPNC_001 = bankLoader.getBankPNC().getAtms().get(0);
 		System.out.println("@Test listActualUsage for ATM PNC_001");
 		assertEquals(facilityUserInterface.listActualUsage(atmPNC_001), 28);
-		//Something is wrong here, the total used minutes should be 28
+		System.out.println("ATM PNC_001 listActualUsage = = 28");
+
 	}
 
 	@Test
 	public void calcUsageRate() {
-		//Plase do a similar use case as in the previous example
+		ATM atmPNC_001 = bankLoader.getBankPNC().getAtms().get(0);
+		System.out.println("@Test calcUsageRate for ATM PNC_001");
+		assertEquals(facilityUserInterface.calcUsageRate(atmPNC_001), 7);
+		System.out.println("ATM PNC_001 calcUsageRate = 7");
 
 	}
 

@@ -213,18 +213,21 @@ public class FacilityClientInterfaceImplTest {
 	 * To do Fix printing method comparison
 	 */
 	@Test
-	public void getFacilityInformation() {
+	public void testGetFacilityInformation() {
+		System.out.println("@Test testGetFacilityInformation for ATM PNC_001");
 		ATM atmPNC_001 = bankLoader.getBankPNC().getAtms().get(0);
 		String printFormat = "ATM [atmId=PNC_001, limit=20000.0, currentAmount=0.0, active=true, atmTransactions=null, address=Address [addressId=ADDRESS_1, street=26 E Pearson St, unit=1, city=Chicago, state=IL, zip=60611]]";
 		assertEquals(facilityClientInterface.getFacilityInformation(atmPNC_001).getTextToPrint(), printFormat);
 	}
 
 	@Test
-	public void removeFacility() {
+	public void testRemoveFacility() {
+		System.out.println("@Test testRemoveFacility of ATM PNC_001");
 		Bank bankPNC = bankLoader.getBankPNC();
 		ATM atmPNC_001 = bankLoader.getBankPNC().getAtms().get(0);
 		assertEquals(facilityClientInterface.removeFacility(bankPNC, atmPNC_001), true);
 		assertEquals(facilityClientInterface.listFacilities(bankLoader.getBankPNC()).size(), 3);
 	}
+
 
 }
