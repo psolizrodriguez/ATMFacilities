@@ -1,5 +1,5 @@
 package com.facilities.model.maintenance;
 
-public class Replenish  extends MaintenanceType{
+public class Replenish  extends MaintenanceRequest{
 
 }

@@ -1,5 +1,8 @@
 package com.facilities.model.maintenance;
 
-public class MaintenanceSchedule {
+import java.util.Calendar;
 
+public class MaintenanceSchedule {
+	private Calendar startMaintenance;
+	private Calendar endMaintenance;
 }
