@@ -11,6 +11,21 @@ public abstract class ATMTransaction {
 	Card card;
 	private Calendar startTime;
 	private Calendar endTime;
+	private int averageMinutes;
+
+	public ATMTransaction(Card card, Calendar startTime) {
+		
+		this.card = card;
+		this.startTime = startTime;
+	}
+
+	public int getAverageMinutes() {
+		return averageMinutes;
+	}
+
+	public void setAverageMinutes(int averageMinutes) {
+		this.averageMinutes = averageMinutes;
+	}
 
 	public Calendar getStartTime() {
 		return startTime;

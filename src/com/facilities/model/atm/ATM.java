@@ -1,5 +1,6 @@
 package com.facilities.model.atm;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.facilities.model.customer.Address;
@@ -85,10 +86,15 @@ public class ATM {
 
 	public boolean performTransaction(ATMTransaction aTMTransaction) {
 		if (active) {
-			return aTMTransaction.processTransaction(this);
-		} else {
-			return false;
+			if (aTMTransaction.processTransaction(this)) {
+				if (atmTransactions == null) {
+					atmTransactions = new ArrayList<>();
+				}
+				atmTransactions.add(aTMTransaction);
+				return true;
+			}
 		}
+		return false;
 	}
 
 	@Override

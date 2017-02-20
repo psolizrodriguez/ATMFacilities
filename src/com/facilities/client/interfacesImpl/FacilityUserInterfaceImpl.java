@@ -4,7 +4,9 @@ import java.util.Calendar;
 import java.util.List;
 
 import com.facilities.client.interfaces.FacilityUserInterface;
+import com.facilities.commons.utils.CommonsUtils;
 import com.facilities.model.atm.ATM;
+import com.facilities.model.maintenance.MaintenanceOrder;
 import com.facilities.model.service.ATMTransaction;
 
 public class FacilityUserInterfaceImpl implements FacilityUserInterface {
@@ -14,8 +16,9 @@ public class FacilityUserInterfaceImpl implements FacilityUserInterface {
 		List<ATMTransaction> listATMTransaction = atm.getAtmTransactions();
 		if (listATMTransaction != null && listATMTransaction.size() > 0) {
 			for (ATMTransaction atmTransaction : listATMTransaction) {
-				if (atmTransaction.getStartTime().getTimeInMillis() >= fromDate.getTimeInMillis()
-						&& atmTransaction.getEndTime().getTimeInMillis() <= toDate.getTimeInMillis()) {
+
+				if (CommonsUtils.isCalendarBetween(atmTransaction.getStartTime(), fromDate, toDate)
+						|| CommonsUtils.isCalendarBetween(atmTransaction.getEndTime(), fromDate, toDate)) {
 					return true;
 				}
 			}
@@ -25,33 +28,54 @@ public class FacilityUserInterfaceImpl implements FacilityUserInterface {
 	}
 
 	@Override
-	public Object assignFacilityToUse() {
+	public boolean assignFacilityToUse(ATM atm, ATMTransaction atmTransaction) {
+		return atm.performTransaction(atmTransaction);
+
+	}
+
+	@Override
+	public boolean vacateFacility(ATM atm) {
+		if (atm.isActive()) {
+			atm.setActive(false);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public List<MaintenanceOrder> listInspections(ATM atm) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Object vacateFacility() {
-		// TODO Auto-generated method stub
-		return null;
+	public long listActualUsage(ATM atm) {
+		long result = 0;
+		List<ATMTransaction> listATMTransaction = atm.getAtmTransactions();
+		if (listATMTransaction != null && listATMTransaction.size() > 0) {
+			for (ATMTransaction atmTransaction : listATMTransaction) {
+				System.out.println(CommonsUtils.CalendarToString(atmTransaction.getStartTime()) + " "
+						+ CommonsUtils.CalendarToString(atmTransaction.getEndTime()));
+				result += CommonsUtils.minutesBetween(atmTransaction.getStartTime(), atmTransaction.getEndTime());
+
+			}
+		}
+
+		return result;
 	}
 
 	@Override
-	public Object listInspections() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public long calcUsageRate(ATM atm) {
+		long result = 0;
+		List<ATMTransaction> listATMTransaction = atm.getAtmTransactions();
+		if (listATMTransaction != null && listATMTransaction.size() > 0) {
+			for (ATMTransaction atmTransaction : listATMTransaction) {
+				result += CommonsUtils.minutesBetween(atmTransaction.getStartTime(), atmTransaction.getEndTime());
+			}
+			result /= listATMTransaction.size();
+		}
 
-	@Override
-	public Object listActualUsage() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Object calcUsageRate() {
-		// TODO Auto-generated method stub
-		return null;
+		return result;
 	}
 
 }

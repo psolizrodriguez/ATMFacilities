@@ -20,6 +20,7 @@ public class BankLoader {
 		bankPNC = new Bank();
 		bankPNC.setAtms(ATMLoader.getPNCATMList());
 		bankPNC.setDebitCards(CardLoader.getPNCCards());
+
 		bankOfAmerica = new Bank();
 		bankOfAmerica.setAtms(ATMLoader.getBOAATMList());
 
