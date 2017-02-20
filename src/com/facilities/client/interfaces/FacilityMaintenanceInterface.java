@@ -1,6 +1,6 @@
 package com.facilities.client.interfaces;
 
-public interface FacilityMaintenanceClientInterface {
+public interface FacilityMaintenanceInterface {
 	public Object makeFacilityMaintRequest();
 	public Object scheduleMaintenance();
 	public Object calcMaintenanceCostForFacility();

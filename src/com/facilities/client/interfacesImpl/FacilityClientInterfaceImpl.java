@@ -16,7 +16,7 @@ public class FacilityClientInterfaceImpl implements FacilityClientInterface {
 
 	public PrinterHelper getFacilityInformation(ATM atm) {
 		PrinterHelper printerHelper = new PrinterHelper();
-		printerHelper.setTextToPrint("Add Print Info of ATM");
+		printerHelper.setTextToPrint(atm.toString());
 		return printerHelper;
 	}
 
@@ -32,8 +32,8 @@ public class FacilityClientInterfaceImpl implements FacilityClientInterface {
 		return false;
 	}
 
-	public void addFacilityDetail(ATM atm, ATMTransaction atmTransaction) {
-		atm.getAtmTransactions().add(atmTransaction);
+	public boolean addFacilityDetail(ATM atm, ATMTransaction atmTransaction) {
+		return atm.performTransaction(atmTransaction);
 
 	}
 

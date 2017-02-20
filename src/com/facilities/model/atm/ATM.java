@@ -22,6 +22,19 @@ public class ATM {
 		this.address = address;
 	}
 
+	public boolean addBalance(Double amount) {
+		currentAmount += amount;
+		return true;
+	}
+
+	public boolean substractBalance(Double amount) {
+		if (currentAmount >= amount) {
+			currentAmount -= amount;
+			return true;
+		}
+		return false;
+	}
+
 	public Double getLimit() {
 		return limit;
 	}
@@ -71,7 +84,11 @@ public class ATM {
 	}
 
 	public boolean performTransaction(ATMTransaction aTMTransaction) {
-		return aTMTransaction.processTransaction(this);
+		if (active) {
+			return aTMTransaction.processTransaction(this);
+		} else {
+			return false;
+		}
 	}
 
 	@Override

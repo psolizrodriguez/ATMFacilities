@@ -1,13 +1,27 @@
 package com.facilities.client.interfacesImpl;
 
-import com.facilities.client.interfaces.FacilityUserClientInterface;
+import java.util.Calendar;
+import java.util.List;
 
-public class FacilityUserInterfaceImpl implements FacilityUserClientInterface {
+import com.facilities.client.interfaces.FacilityUserInterface;
+import com.facilities.model.atm.ATM;
+import com.facilities.model.service.ATMTransaction;
+
+public class FacilityUserInterfaceImpl implements FacilityUserInterface {
 
 	@Override
-	public Object isInUseDuringInterval() {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean isInUseDuringInterval(ATM atm, Calendar fromDate, Calendar toDate) {
+		List<ATMTransaction> listATMTransaction = atm.getAtmTransactions();
+		if (listATMTransaction != null && listATMTransaction.size() > 0) {
+			for (ATMTransaction atmTransaction : listATMTransaction) {
+				if (atmTransaction.getStartTime().getTimeInMillis() >= fromDate.getTimeInMillis()
+						&& atmTransaction.getEndTime().getTimeInMillis() <= toDate.getTimeInMillis()) {
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 
 	@Override

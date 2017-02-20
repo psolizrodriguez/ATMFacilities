@@ -6,12 +6,23 @@ import java.util.List;
 
 public abstract class Card {
 	private Customer owner;
-	private int cardNumber;
-	private int pinNumber;
-	private int securityCode;
+	private String cardNumber;
+	private String pinNumber;
+	private String securityCode;
 	private Calendar validDate;
 	private Address address;
 	private List<Account> accounts = new ArrayList<Account>();
+
+	public Card(Customer owner, String cardNumber, String pinNumber, String securityCode, Calendar validDate,
+			Address address, List<Account> accounts) {
+		this.owner = owner;
+		this.cardNumber = cardNumber;
+		this.pinNumber = pinNumber;
+		this.securityCode = securityCode;
+		this.validDate = validDate;
+		this.address = address;
+		this.accounts = accounts;
+	}
 
 	public Customer getOwner() {
 		return owner;
@@ -21,27 +32,27 @@ public abstract class Card {
 		this.owner = owner;
 	}
 
-	public int getCardNumber() {
+	public String getCardNumber() {
 		return cardNumber;
 	}
 
-	public void setCardNumber(int cardNumber) {
+	public void setCardNumber(String cardNumber) {
 		this.cardNumber = cardNumber;
 	}
 
-	public int getPinNumber() {
+	public String getPinNumber() {
 		return pinNumber;
 	}
 
-	public void setPinNumber(int pinNumber) {
+	public void setPinNumber(String pinNumber) {
 		this.pinNumber = pinNumber;
 	}
 
-	public int getSecurityCode() {
+	public String getSecurityCode() {
 		return securityCode;
 	}
 
-	public void setSecurityCode(int securityCode) {
+	public void setSecurityCode(String securityCode) {
 		this.securityCode = securityCode;
 	}
 

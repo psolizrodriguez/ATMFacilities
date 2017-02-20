@@ -14,7 +14,7 @@ public class QueryTransaction extends ATMTransaction {
 
 	public boolean processTransaction(ATM atm) {
 		this.balance = account.getBalance();
-		return false;
+		return true;
 	}
 
 	public Double getBalance() {

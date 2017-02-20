@@ -18,9 +18,15 @@ public class BankLoader {
 
 	public BankLoader() {
 		bankPNC = new Bank();
+		bankPNC.setAtms(ATMLoader.getPNCATMList());
+		bankPNC.setDebitCards(CardLoader.getPNCCards());
 		bankOfAmerica = new Bank();
+		bankOfAmerica.setAtms(ATMLoader.getBOAATMList());
+
 		bankCitibank = new Bank();
+		bankCitibank.setAtms(ATMLoader.getCBATMList());
 		chaseBank = new Bank();
+		chaseBank.setAtms(ATMLoader.getCBATMList());
 	}
 
 	public Bank getBankPNC() {

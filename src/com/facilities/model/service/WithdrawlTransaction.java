@@ -14,7 +14,10 @@ public class WithdrawlTransaction extends ATMTransaction {
 	}
 
 	public boolean processTransaction(ATM atm) {
-		account.debit(amount);
+		if (atm.substractBalance(amount)) {
+
+			return account.debit(amount);
+		}
 		return false;
 	}
 

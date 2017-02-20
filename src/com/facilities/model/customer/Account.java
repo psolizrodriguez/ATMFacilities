@@ -6,6 +6,12 @@ public abstract class Account {
 	private String accountNumber;
 	private Double balance;
 
+	public Account(Customer owner, String accountNumber, Double balance) {
+		this.owner = owner;
+		this.accountNumber = accountNumber;
+		this.balance = balance;
+	}
+
 	public Customer getOwner() {
 		return owner;
 	}

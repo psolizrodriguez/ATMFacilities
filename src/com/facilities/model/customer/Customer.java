@@ -12,6 +12,15 @@ public class Customer {
 	private List<Account> accounts = new ArrayList<Account>();
 	private List<Card> debitCards = new ArrayList<Card>();
 
+	public Customer(String customerId, String lastName, String firstName, Address billingAddress,
+			Address shippingAddress) {
+		this.customerId = customerId;
+		this.lastName = lastName;
+		this.firstName = firstName;
+		this.billingAddress = billingAddress;
+		this.shippingAddress = shippingAddress;
+	}
+
 	public List<Account> getAccounts() {
 		return accounts;
 	}

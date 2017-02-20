@@ -5,7 +5,7 @@
   <class id="1" language="java" name="com.facilities.model.service.ATMTransaction" project="COMP473P1_Facilities" 
     file="/COMP473P1_Facilities/src/com/facilities/model/service/ATMTransaction.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1137" y="1106"/>    
+    <position height="-1" width="-1" x="1184" y="1174"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -14,7 +14,7 @@
   </class>  
   <class id="2" language="java" name="com.facilities.model.customer.Account" project="COMP473P1_Facilities" 
     file="/COMP473P1_Facilities/src/com/facilities/model/customer/Account.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="545" y="1290"/>    
+    <position height="-1" width="-1" x="544" y="1537"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -33,7 +33,7 @@
   <class id="4" language="java" name="com.facilities.model.customer.CheckingAccount" project="COMP473P1_Facilities" 
     file="/COMP473P1_Facilities/src/com/facilities/model/customer/CheckingAccount.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="238" y="1314"/>    
+    <position height="-1" width="-1" x="218" y="1580"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -43,7 +43,7 @@
   <class id="5" language="java" name="com.facilities.model.customer.SavingAccount" project="COMP473P1_Facilities" 
     file="/COMP473P1_Facilities/src/com/facilities/model/customer/SavingAccount.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="224" y="1170"/>    
+    <position height="-1" width="-1" x="229" y="1394"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -52,7 +52,7 @@
   </class>  
   <class id="6" language="java" name="com.facilities.model.customer.Card" project="COMP473P1_Facilities" 
     file="/COMP473P1_Facilities/src/com/facilities/model/customer/Card.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="550" y="823"/>    
+    <position height="-1" width="-1" x="633" y="835"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -72,7 +72,7 @@
     project="COMP473P1_Facilities" 
     file="/COMP473P1_Facilities/src/com/facilities/model/service/PINValidationTransaction.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="850" y="1411"/>    
+    <position height="-1" width="-1" x="869" y="1513"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -82,7 +82,7 @@
   <class id="9" language="java" name="com.facilities.model.service.QueryTransaction" project="COMP473P1_Facilities" 
     file="/COMP473P1_Facilities/src/com/facilities/model/service/QueryTransaction.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1170" y="1395"/>    
+    <position height="-1" width="-1" x="1189" y="1497"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -197,7 +197,7 @@
   </class>  
   <class id="21" language="java" name="com.facilities.model.customer.CreditCard" project="COMP473P1_Facilities" 
     file="/COMP473P1_Facilities/src/com/facilities/model/customer/CreditCard.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="775" y="665"/>    
+    <position height="-1" width="-1" x="801" y="1181"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -206,7 +206,7 @@
   </class>  
   <class id="22" language="java" name="com.facilities.model.customer.DebitCard" project="COMP473P1_Facilities" 
     file="/COMP473P1_Facilities/src/com/facilities/model/customer/DebitCard.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="785" y="805"/>    
+    <position height="-1" width="-1" x="279" y="1182"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -246,10 +246,10 @@
   <association id="27">    
     <end type="SOURCE" refId="3" navigable="false">      
       <attribute id="28" name="debitCards">        
-        <position height="0" width="0" x="20" y="499"/>      
+        <position height="0" width="0" x="103" y="511"/>      
       </attribute>      
       <multiplicity id="29" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="20" y="499"/>      
+        <position height="0" width="0" x="103" y="511"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="6" navigable="true"/>    
@@ -294,10 +294,10 @@
   <association id="40">    
     <end type="SOURCE" refId="7" navigable="false">      
       <attribute id="41" name="debitCards">        
-        <position height="0" width="0" x="20" y="499"/>      
+        <position height="0" width="0" x="103" y="511"/>      
       </attribute>      
       <multiplicity id="42" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="20" y="499"/>      
+        <position height="0" width="0" x="103" y="511"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="6" navigable="true"/>    
@@ -310,10 +310,10 @@
   <association id="44">    
     <end type="SOURCE" refId="20" navigable="false">      
       <attribute id="45" name="atmTransactions">        
-        <position height="0" width="0" x="214" y="494"/>      
+        <position height="0" width="0" x="261" y="562"/>      
       </attribute>      
       <multiplicity id="46" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="214" y="494"/>      
+        <position height="0" width="0" x="261" y="562"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
@@ -354,10 +354,10 @@
   <association id="56">    
     <end type="SOURCE" refId="6" navigable="false">      
       <attribute id="57" name="accounts">        
-        <position height="0" width="0" x="15" y="803"/>      
+        <position height="0" width="0" x="14" y="1050"/>      
       </attribute>      
       <multiplicity id="58" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="15" y="803"/>      
+        <position height="0" width="0" x="14" y="1050"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
@@ -394,10 +394,10 @@
   <association id="67">    
     <end type="SOURCE" refId="3" navigable="false">      
       <attribute id="68" name="accounts">        
-        <position height="0" width="0" x="15" y="803"/>      
+        <position height="0" width="0" x="14" y="1050"/>      
       </attribute>      
       <multiplicity id="69" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="15" y="803"/>      
+        <position height="0" width="0" x="14" y="1050"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
@@ -418,10 +418,10 @@
   <association id="74">    
     <end type="SOURCE" refId="1" navigable="false">      
       <attribute id="75" name="account">        
-        <position height="0" width="0" x="15" y="803"/>      
+        <position height="0" width="0" x="14" y="1050"/>      
       </attribute>      
       <multiplicity id="76" minimum="0" maximum="1">        
-        <position height="0" width="0" x="15" y="803"/>      
+        <position height="0" width="0" x="14" y="1050"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    

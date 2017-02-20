@@ -1,5 +1,7 @@
 package com.facilities.model.service;
 
+import java.util.Calendar;
+
 import com.facilities.model.atm.ATM;
 import com.facilities.model.customer.Account;
 import com.facilities.model.customer.Card;
@@ -7,6 +9,24 @@ import com.facilities.model.customer.Card;
 public abstract class ATMTransaction {
 	Account account;
 	Card card;
+	private Calendar startTime;
+	private Calendar endTime;
+
+	public Calendar getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(Calendar startTime) {
+		this.startTime = startTime;
+	}
+
+	public Calendar getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(Calendar endTime) {
+		this.endTime = endTime;
+	}
 
 	public Card getCard() {
 		return card;

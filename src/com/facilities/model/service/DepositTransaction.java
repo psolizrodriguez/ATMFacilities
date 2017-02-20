@@ -22,7 +22,9 @@ public class DepositTransaction extends ATMTransaction {
 	}
 
 	public boolean processTransaction(ATM atm) {
-		account.credit(amountDeposit);
+		if (atm.addBalance(amountDeposit)) {
+			return account.credit(amountDeposit);
+		}
 		return false;
 	}
 

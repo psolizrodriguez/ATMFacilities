@@ -15,9 +15,13 @@ public interface FacilityClientInterface {
 
 	public Double requestAvailableCapacity(ATM atm); // Print money left in ATM
 
-	public boolean addNewFacility(Bank bank, ATM atm);// Add new ATM
+	public boolean addNewFacility(Bank bank, ATM atm);// Add new ATM to Bank
 
-	public void addFacilityDetail(ATM atm, ATMTransaction atmTransaction);// Add transactions to the ATM
+	public boolean addFacilityDetail(ATM atm, ATMTransaction atmTransaction);// Perform
+																			// transactions
+																			// to
+																			// the
+																			// ATM
 
 	public boolean removeFacility(Bank bank, ATM atm);// Delete ATM from Bank
 }
