@@ -46,4 +46,8 @@ public class CommonsUtils {
 	public static long minutesBetween(Calendar startDate, Calendar endDate) {
 		return ChronoUnit.MINUTES.between(startDate.toInstant(), endDate.toInstant());
 	}
+	
+	public static long hoursBetween(Calendar startDate, Calendar endDate) {
+		return ChronoUnit.HOURS.between(startDate.toInstant(), endDate.toInstant());
+	}
 }

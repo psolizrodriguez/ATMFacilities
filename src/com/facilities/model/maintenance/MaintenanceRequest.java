@@ -1,26 +1,38 @@
 package com.facilities.model.maintenance;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import com.facilities.model.atm.ATM;
-import com.facilities.model.atm.Bank;
 
 public abstract class MaintenanceRequest {
-	private Double cost;
 	private String description;
-	private int requestStatus;
-	private Bank bank;
+	private boolean open;
 	private ATM atm;
-	private Calendar startMaintenance;
-	private Calendar endMaintenance;
-	private ServiceProvider serviceProvider;
+	private int averageHours;
+	private Double averageCost;
+	private List<MaintenanceCost> listMaintenanceCost;
 
-	public Double getCost() {
-		return cost;
+	public int getAverageHours() {
+		return averageHours;
 	}
 
-	public void setCost(Double cost) {
-		this.cost = cost;
+	public void setAverageHours(int averageHours) {
+		this.averageHours = averageHours;
+	}
+
+	public Double getAverageCost() {
+		return averageCost;
+	}
+
+	public void setAverageCost(Double averageCost) {
+		this.averageCost = averageCost;
+	}
+
+	public MaintenanceRequest(ATM atm, String description) {
+		this.atm = atm;
+		this.description = description;
 	}
 
 	public String getDescription() {
@@ -31,20 +43,12 @@ public abstract class MaintenanceRequest {
 		this.description = description;
 	}
 
-	public int getRequestStatus() {
-		return requestStatus;
+	public boolean isOpen() {
+		return open;
 	}
 
-	public void setRequestStatus(int requestStatus) {
-		this.requestStatus = requestStatus;
-	}
-
-	public Bank getBank() {
-		return bank;
-	}
-
-	public void setBank(Bank bank) {
-		this.bank = bank;
+	public void setOpen(boolean open) {
+		this.open = open;
 	}
 
 	public ATM getAtm() {
@@ -55,28 +59,22 @@ public abstract class MaintenanceRequest {
 		this.atm = atm;
 	}
 
-	public Calendar getStartMaintenance() {
-		return startMaintenance;
+	public List<MaintenanceCost> getListMaintenanceCost() {
+		return listMaintenanceCost;
 	}
 
-	public void setStartMaintenance(Calendar startMaintenance) {
-		this.startMaintenance = startMaintenance;
+	public void setListMaintenanceCost(List<MaintenanceCost> listMaintenanceCost) {
+		this.listMaintenanceCost = listMaintenanceCost;
 	}
 
-	public Calendar getEndMaintenance() {
-		return endMaintenance;
-	}
+	public abstract boolean calculateCosts(ServiceProvider serviceProvider, Calendar startDate, Calendar enDate);
 
-	public void setEndMaintenance(Calendar endMaintenance) {
-		this.endMaintenance = endMaintenance;
-	}
+	public boolean addCostsToList(MaintenanceCost maintenanceCost) {
+		if (listMaintenanceCost == null) {
+			listMaintenanceCost = new ArrayList<>();
+		}
+		return listMaintenanceCost.add(maintenanceCost);
 
-	public ServiceProvider getServiceProvider() {
-		return serviceProvider;
-	}
-
-	public void setServiceProvider(ServiceProvider serviceProvider) {
-		this.serviceProvider = serviceProvider;
 	}
 
 }

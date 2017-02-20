@@ -2,9 +2,19 @@ package com.facilities.model.maintenance;
 
 import java.util.List;
 
-public class MaintenanceOrder extends MaintenanceRequest {
+public class MaintenanceOrder {
 	private MaintenanceRequest maintenanceRequest;
+	private MaintenanceCost maintenanceCost;
 	private int orderStatus;
+
+	public MaintenanceCost getMaintenanceCost() {
+		return maintenanceCost;
+	}
+
+	public void setMaintenanceCost(MaintenanceCost maintenanceCost) {
+		this.maintenanceCost = maintenanceCost;
+	}
+
 	private List<MaintenanceSchedule> listMaintenanceSchedule;
 
 	public MaintenanceRequest getMaintenanceRequest() {

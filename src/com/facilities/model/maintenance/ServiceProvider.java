@@ -1,14 +1,15 @@
 package com.facilities.model.maintenance;
 
+import java.util.Calendar;
 import java.util.List;
 
+import com.facilities.commons.utils.CommonsUtils;
 import com.facilities.model.customer.Address;
 
 public class ServiceProvider {
 	private String legalName;
 	private int rating;
 	private List<Address> listAddress;
-	private List<MaintenanceOrder> maintenanceOrder;
 
 	public String getLegalName() {
 		return legalName;
@@ -34,12 +35,10 @@ public class ServiceProvider {
 		this.listAddress = listAddress;
 	}
 
-	public List<MaintenanceOrder> getMaintenanceOrder() {
-		return maintenanceOrder;
-	}
-
-	public void setMaintenanceOrder(List<MaintenanceOrder> maintenanceOrder) {
-		this.maintenanceOrder = maintenanceOrder;
+	public boolean calculateCosts(MaintenanceRequest maintenanceRequest, Calendar startDate, Calendar endDate) {
+		MaintenanceCost maintenanceCost = new MaintenanceCost(maintenanceRequest.getAverageCost() * rating,
+				legalName + rating, startDate, endDate, this, CommonsUtils.hoursBetween(startDate, endDate));
+		return maintenanceRequest.addCostsToList(maintenanceCost);
 	}
 
 }
