@@ -164,29 +164,29 @@ public class FacilityClientInterfaceImplTest {
 		ATM atmPNC_001 = bankLoader.getBankPNC().getAtms().get(0);
 		System.out.println("@Test addFacilityDetail for Pin Validation for card 0000001 with ping 1111");
 		ATMTransaction pinValidation = new PINValidationTransaction(debitCard,
-				CommonsUtils.getCalendar(02, 18, 2017, 11, 30, 0), "1111");
+				CommonsUtils.getCalendar(02, 18, 2017, 11, 30, 0,0), "1111");
 		assertEquals(facilityClientInterface.addFacilityDetail(atmPNC_001, pinValidation), true);
 		System.out.println("@Test addFacilityDetail for Pin Validation for card 0000001 with ping 1112");
 		ATMTransaction pinValidationFailed = new PINValidationTransaction(debitCard,
-				CommonsUtils.getCalendar(02, 18, 2017, 11, 40, 0), "1112");
+				CommonsUtils.getCalendar(02, 18, 2017, 11, 40, 0,0), "1112");
 		assertEquals(facilityClientInterface.addFacilityDetail(atmPNC_001, pinValidationFailed), false);
 		// Account 0000001
 		System.out.println("@Test addFacilityDetail for deposit 0000001");
 		Account checkingAccount = debitCard.getAccounts().get(0);
 		ATMTransaction depositToAccount = new DepositTransaction(checkingAccount, debitCard,
-				CommonsUtils.getCalendar(02, 18, 2017, 11, 50, 0), 1000.0);
+				CommonsUtils.getCalendar(02, 18, 2017, 11, 50, 0,0), 1000.0);
 		assertEquals(facilityClientInterface.addFacilityDetail(atmPNC_001, depositToAccount), true);
 		assertEquals((Object) checkingAccount.getBalance(), (Object) 1000.0);
 		System.out.println("@Test addFacilityDetail for withdrawal 0000001");
 		ATMTransaction withdrawFromAccount = new WithdrawlTransaction(checkingAccount, debitCard,
-				CommonsUtils.getCalendar(02, 18, 2017, 12, 00, 0), 500.0);
+				CommonsUtils.getCalendar(02, 18, 2017, 12, 00, 0,0), 500.0);
 		assertEquals(facilityClientInterface.addFacilityDetail(atmPNC_001, withdrawFromAccount), true);
 		assertEquals((Object) checkingAccount.getBalance(), (Object) 500.0);
 		// Account 0000002
 		System.out.println("@Test addFacilityDetail for transfer from 0000001 to 0000002");
 		Account savingAccount = debitCard.getAccounts().get(1);
 		ATMTransaction transferFromAccount = new TransferTransaction(checkingAccount, debitCard,
-				CommonsUtils.getCalendar(02, 18, 2017, 12, 10, 0), 300.0, savingAccount);
+				CommonsUtils.getCalendar(02, 18, 2017, 12, 10, 0,0), 300.0, savingAccount);
 		assertEquals(facilityClientInterface.addFacilityDetail(atmPNC_001, transferFromAccount), true);
 		assertEquals((Object) checkingAccount.getBalance(), (Object) 200.0);
 		assertEquals((Object) savingAccount.getBalance(), (Object) 300.0);
@@ -200,11 +200,11 @@ public class FacilityClientInterfaceImplTest {
 		Card debitCard = bankLoader.getBankPNC().getDebitCards().get(0);
 		Account checkingAccount = debitCard.getAccounts().get(0);
 		ATMTransaction withdrawFromAccount = new WithdrawlTransaction(checkingAccount, debitCard,
-				CommonsUtils.getCalendar(02, 18, 2017, 12, 20, 0), 500.0);
+				CommonsUtils.getCalendar(02, 18, 2017, 12, 20, 0,0), 500.0);
 		assertEquals(facilityClientInterface.addFacilityDetail(atmPNC_001, withdrawFromAccount), false);
 		assertEquals(facilityClientInterface.requestAvailableCapacity(atmPNC_001), (Object) 0.0);
 		ATMTransaction depositToAccount = new DepositTransaction(checkingAccount, debitCard,
-				CommonsUtils.getCalendar(02, 18, 2017, 12, 30, 0), 1000.0);
+				CommonsUtils.getCalendar(02, 18, 2017, 12, 30, 0,0), 1000.0);
 		assertEquals(facilityClientInterface.addFacilityDetail(atmPNC_001, depositToAccount), true);
 		assertEquals(facilityClientInterface.requestAvailableCapacity(atmPNC_001), (Object) 1000.0);
 	}

@@ -17,6 +17,7 @@ public class FacilityClientInterfaceImpl implements FacilityClientInterface {
 	public PrinterHelper getFacilityInformation(ATM atm) {
 		PrinterHelper printerHelper = new PrinterHelper();
 		printerHelper.setTextToPrint(atm.toString());
+		printerHelper.setDataObject(atm);
 		return printerHelper;
 	}
 

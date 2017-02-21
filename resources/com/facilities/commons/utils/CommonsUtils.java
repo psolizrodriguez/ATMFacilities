@@ -5,14 +5,15 @@ import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 
 public class CommonsUtils {
-	public static Calendar getCalendar(int month, int day, int year, int hours, int minutes, int seconds) {
+	public static Calendar getCalendar(int month, int day, int year, int hours, int minutes, int seconds, int atmpm) {
 		Calendar date = Calendar.getInstance();
 		date.set(Calendar.YEAR, year);
-		date.set(Calendar.MONTH, month + 1);
+		date.set(Calendar.MONTH, month - 1);
 		date.set(Calendar.DAY_OF_MONTH, day);
 		date.set(Calendar.HOUR, hours);
 		date.set(Calendar.MINUTE, minutes);
 		date.set(Calendar.SECOND, seconds);
+		date.set(Calendar.AM_PM, atmpm);
 
 		return date;
 	}
@@ -37,6 +38,7 @@ public class CommonsUtils {
 		date.set(Calendar.HOUR, calendar.get(Calendar.HOUR));
 		date.set(Calendar.MINUTE, calendar.get(Calendar.MINUTE) + minutes);
 		date.set(Calendar.SECOND, calendar.get(Calendar.SECOND));
+		date.set(Calendar.AM_PM, calendar.get(Calendar.AM_PM));
 
 		return date;
 	}

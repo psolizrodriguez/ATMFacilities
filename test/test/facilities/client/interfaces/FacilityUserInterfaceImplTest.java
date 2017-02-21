@@ -35,11 +35,12 @@ public class FacilityUserInterfaceImplTest {
 	public void isInUseDuringInterval() {
 		ATM PNC_001 = bankLoader.getBankPNC().getAtms().get(0);
 		System.out.println("@Test isInUseDuringInterval()");
-		System.out.println("ATM was not in use from 12:30:00 02-18-2017 to 16:35:00 02-18-2017");
-		Calendar fromTime = CommonsUtils.getCalendar(02, 18, 2017, 12, 00, 00);
-		Calendar toTime = CommonsUtils.getCalendar(02, 18, 2017, 16, 35, 00);
+		System.out.println("ATM was not in use from 09:30:00 02-18-2017 to 10:30:00 02-18-2017");
+		Calendar fromTime = CommonsUtils.getCalendar(02, 18, 2017, 12, 30, 00, 1);
+		Calendar toTime = CommonsUtils.getCalendar(02, 18, 2017, 14, 59, 00, 1);
 		assertEquals(facilityUserInterface.isInUseDuringInterval(PNC_001, fromTime, toTime), true);
-		fromTime = CommonsUtils.getCalendar(02, 18, 2017, 12, 30, 00);
+		fromTime = CommonsUtils.getCalendar(02, 18, 2017, 9, 30, 00, 1);
+		toTime = CommonsUtils.getCalendar(02, 18, 2017, 10, 30, 00, 1);
 		assertEquals(facilityUserInterface.isInUseDuringInterval(PNC_001, fromTime, toTime), false);
 	}
 
@@ -50,7 +51,7 @@ public class FacilityUserInterfaceImplTest {
 		Card debitCard = bankLoader.getBankPNC().getDebitCards().get(0);
 		Account checkingAccount = debitCard.getAccounts().get(0);
 		ATMTransaction withdrawFromAccount = new WithdrawlTransaction(checkingAccount, debitCard,
-				CommonsUtils.getCalendar(02, 18, 2017, 13, 20, 0), 10.0);
+				CommonsUtils.getCalendar(02, 18, 2017, 13, 20, 0, 0), 10.0);
 		assertEquals(facilityUserInterface.assignFacilityToUse(atmPNC_001, withdrawFromAccount), true);
 		assertEquals((Object) atmPNC_001.getCurrentAmount(), (Object) 490.0);
 	}
@@ -65,14 +66,14 @@ public class FacilityUserInterfaceImplTest {
 		Card debitCard = bankLoader.getBankPNC().getDebitCards().get(0);
 		Account checkingAccount = debitCard.getAccounts().get(0);
 		ATMTransaction withdrawFromAccount = new WithdrawlTransaction(checkingAccount, debitCard,
-				CommonsUtils.getCalendar(02, 18, 2017, 13, 20, 0), 10.0);
+				CommonsUtils.getCalendar(02, 18, 2017, 13, 20, 0, 0), 10.0);
 		assertEquals(facilityUserInterface.assignFacilityToUse(atmPNC_001, withdrawFromAccount), true);
 		System.out.println("ATM PNC_001 is doing a withdrawFromAccount Transaction");
 		assertEquals(facilityUserInterface.vacateFacility(atmPNC_001), true);
 		System.out.println("ATM PNC_001 is vacating");
 		System.out.println("ATM PNC_001 is trying to do depositToAccount Transaction");
 		ATMTransaction depositToAccount = new DepositTransaction(checkingAccount, debitCard,
-				CommonsUtils.getCalendar(02, 18, 2017, 13, 20, 0), 10.0);
+				CommonsUtils.getCalendar(02, 18, 2017, 13, 20, 0, 0), 10.0);
 		assertEquals(facilityUserInterface.assignFacilityToUse(atmPNC_001, depositToAccount), false);
 
 		System.out.println("ATM PNC_001 depositToAccount Transaction returns false");

@@ -9,12 +9,25 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+
+import com.facilities.commons.utils.BankLoader;
+import com.facilities.model.atm.ATM;
+import com.facilities.model.atm.Bank;
+
 import java.awt.event.ActionListener;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
 
 public class Main {
 
 	private JFrame frmCompProject;
 	private final Action action = new SwingAction();
+	private BankLoader bankLoader = new BankLoader();
+	private final Action usageRate = new usageRateAction();
+	private final Action actualUsage = new actualUsageAction();
+	private final Action checkUsage = new checkUsageAction();
+
 
 	/**
 	 * Launch the application.
@@ -53,15 +66,46 @@ public class Main {
 
 		JMenu mnBanks = new JMenu("Banks");
 		menuBar.add(mnBanks);
+		
+		JMenu mnUserInterface = new JMenu("Facility Statistics");
+		menuBar.add(mnUserInterface);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Usage Rate");
+		mntmNewMenuItem.setAction(usageRate);
+		mnUserInterface.add(mntmNewMenuItem);
+		
+		JMenuItem mntmActualUsage = new JMenuItem("Actual Usage");
+		mntmActualUsage.setAction(actualUsage);
+		mnUserInterface.add(mntmActualUsage);
+		
+		JMenuItem mntmCheckUsage = new JMenuItem("Check Usage");
+		mntmCheckUsage.setAction(checkUsage);
+		mnUserInterface.add(mntmCheckUsage);
+		
+		JMenu mntmBanks;
+		HashMap<String, List<ATM>> values = bankLoader.getBankLists();
 
-		JMenuItem mntmBanks = new JMenuItem("Banks");
-		mntmBanks.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("here");
+		for (String value  : bankLoader.toString().split(",")) {
+			mntmBanks = new JMenu(value);
+			mntmBanks.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					System.out.println("here");
+				}
+			});
+			for (final ATM atm : values.get(value)) {			
+				JMenuItem mntmATMs = new JMenuItem(atm.getAtmId());
+				mntmBanks.add(mntmATMs);
+				mntmATMs.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						JFrame atmFrame = new ATMDetail(atm);
+						atmFrame.setVisible(true);
+					}
+				});
 			}
-		});
-		mntmBanks.setAction(action);
-		mnBanks.add(mntmBanks);
+			mntmBanks.setText(value);
+			mnBanks.add(mntmBanks);
+		}
+		
 	}
 
 	private class SwingAction extends AbstractAction {
@@ -72,6 +116,37 @@ public class Main {
 
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("here");
+		}
+	}
+	private class usageRateAction extends AbstractAction {
+		public usageRateAction() {
+			putValue(NAME, "Usage Rate");
+			putValue(SHORT_DESCRIPTION, "Calculate the usage rate of the facility");
+		}
+		public void actionPerformed(ActionEvent e) {
+			JFrame usageRateCalFrame = new ClientCalculaion("Usage Rate");
+			usageRateCalFrame.setVisible(true);
+		}
+	}
+	private class actualUsageAction extends AbstractAction {
+		public actualUsageAction() {
+			putValue(NAME, "Actual Usage");
+			putValue(SHORT_DESCRIPTION, "Calculate the actual usage of the facility");
+		}
+		public void actionPerformed(ActionEvent e) {
+			JFrame usageRateCalFrame = new ClientCalculaion("Actual Usage");
+			usageRateCalFrame.setVisible(true);
+		}
+	}
+	
+	private class checkUsageAction extends AbstractAction {
+		public checkUsageAction() {
+			putValue(NAME, "Check Usage");
+			putValue(SHORT_DESCRIPTION, "Check the usage of the facility");
+		}
+		public void actionPerformed(ActionEvent e) {
+			JFrame checkUsageFrame = new ClientUsage();
+			checkUsageFrame.setVisible(true);
 		}
 	}
 }
