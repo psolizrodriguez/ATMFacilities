@@ -23,7 +23,7 @@ public class MaintenanceOrdersLoader {
 		MaintenanceRequest diagnosticRequest = new Diagnostic(atmPNC_001, "First Diagnostic Maintenenance");
 		listMaintenanceRequest.add(diagnosticRequest);
 		System.out.println("We create a Replenish Maintenance Request");
-		MaintenanceRequest replenishRequest = new Replenish(atmPNC_001, "First Replenish Maintenenance");
+		MaintenanceRequest replenishRequest = new Replenish(atmPNC_001, "First Replenish Maintenenance", 100000.0);
 		listMaintenanceRequest.add(replenishRequest);
 		System.out.println("We create a Repair Maintenance Request");
 		MaintenanceRequest repairRequest = new Repair(atmPNC_001, "First Repair Maintenenance");

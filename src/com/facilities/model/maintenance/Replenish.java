@@ -5,11 +5,13 @@ import java.util.Calendar;
 import com.facilities.model.atm.ATM;
 
 public class Replenish extends MaintenanceRequest {
-	public Replenish(ATM atm, String description) {
+
+	public Replenish(ATM atm, String description, Double amountToReplenish) {
 		super(atm, description);
 		this.setAverageHours(2);
 		this.setAverageCost(500.0);
 		this.setMaintenanceType("REPLENISH");
+		this.setAmountToReplenish(amountToReplenish);
 	}
 
 	@Override

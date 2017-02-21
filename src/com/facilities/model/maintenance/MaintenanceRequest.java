@@ -14,6 +14,15 @@ public abstract class MaintenanceRequest {
 	private Double averageCost;
 	private String maintenanceType;
 	private MaintenanceOrder maintenanceOrder;
+	private Double amountToReplenish;
+
+	public Double getAmountToReplenish() {
+		return amountToReplenish;
+	}
+
+	public void setAmountToReplenish(Double amountToReplenish) {
+		this.amountToReplenish = amountToReplenish;
+	}
 
 	public MaintenanceOrder getMaintenanceOrder() {
 		return maintenanceOrder;

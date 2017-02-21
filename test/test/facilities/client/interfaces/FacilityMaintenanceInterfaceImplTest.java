@@ -41,7 +41,7 @@ public class FacilityMaintenanceInterfaceImplTest {
 	 */
 	@Test
 	public void makeFacilityMaintRequestTest() {
-		System.out.println("@makeFacilityMaintRequestTest");
+		System.out.println("\n@makeFacilityMaintRequestTest");
 		System.out.println("We get the PNC_001 atm and create a Diagnostic Maintenance Request");
 		ATM atmPNC_001 = bankLoader.getBankPNC().getAtms().get(0);
 		MaintenanceRequest maintenanceRequest = new Diagnostic(atmPNC_001, "First Diagnostic Maintenenance");
@@ -53,7 +53,7 @@ public class FacilityMaintenanceInterfaceImplTest {
 
 	@Test
 	public void scheduleMaintenanceTest() {
-		System.out.println("@scheduleMaintenanceTest");
+		System.out.println("\n@scheduleMaintenanceTest");
 		System.out.println("We get the PNC_001 atm and create a Diagnostic Maintenance Request");
 		ATM atmPNC_001 = bankLoader.getBankPNC().getAtms().get(0);
 		MaintenanceRequest maintenanceRequest = new Diagnostic(atmPNC_001, "First Diagnostic Maintenenance");
@@ -82,7 +82,7 @@ public class FacilityMaintenanceInterfaceImplTest {
 
 	@Test
 	public void calcMaintenanceCostForFacilityTest() {
-		System.out.println("@calcMaintenanceCostForFacilityTest");
+		System.out.println("\n@calcMaintenanceCostForFacilityTest");
 		ATM atmPNC_001 = bankLoader.getBankPNC().getAtms().get(0);
 		System.out.println("We calculate the cost of all the maintenance that has been done to the PNC_001 ATM");
 		System.out.println(
@@ -111,7 +111,7 @@ public class FacilityMaintenanceInterfaceImplTest {
 
 	@Test
 	public void calcProblemRateForFacilityTest() {
-		System.out.println("@calcProblemRateForFacilityTest");
+		System.out.println("\n@calcProblemRateForFacilityTest");
 		ATM atmPNC_001 = bankLoader.getBankPNC().getAtms().get(0);
 		System.out.println("We calculate how many times the PNC_001 ATM has been in maintenance, this should list 4");
 		assertEquals(facilityMaintenanceInterface.calcProblemRateForFacility(atmPNC_001, listMaintenanceRequest), 4);
@@ -137,7 +137,7 @@ public class FacilityMaintenanceInterfaceImplTest {
 
 	@Test
 	public void calcDownTimeForFacilityTest() {
-		System.out.println("@calcDownTimeForFacilityTest");
+		System.out.println("\n@calcDownTimeForFacilityTest");
 		ATM atmPNC_001 = bankLoader.getBankPNC().getAtms().get(0);
 		System.out.println(
 				"We calculate how many hours the PNC_001 ATM has been under maintenance, (4,4,4,4) this should list 16");
@@ -161,7 +161,7 @@ public class FacilityMaintenanceInterfaceImplTest {
 
 	@Test
 	public void listMaintRequestsTest() {
-		System.out.println("@listMaintRequestsTest");
+		System.out.println("\n@listMaintRequestsTest");
 		ATM atmPNC_001 = bankLoader.getBankPNC().getAtms().get(0);
 		System.out.println(
 				"We calculate how many maintenance request had been set on the PNC_001 ATM, this should list 4");
@@ -185,7 +185,7 @@ public class FacilityMaintenanceInterfaceImplTest {
 
 	@Test
 	public void listMaintenanceTest() {
-		System.out.println("@listMaintenanceTest");
+		System.out.println("\n@listMaintenanceTest");
 		ATM atmPNC_001 = bankLoader.getBankPNC().getAtms().get(0);
 		System.out.println(
 				"We calculate how maintenance request had been processed on the PNC_001 ATM, this should list 4");
@@ -215,7 +215,7 @@ public class FacilityMaintenanceInterfaceImplTest {
 	 */
 	@Test
 	public void listFacilityProblemsTest() {
-		System.out.println("@listFacilityProblemsTest");
+		System.out.println("\n@listFacilityProblemsTest");
 		ATM atmPNC_001 = bankLoader.getBankPNC().getAtms().get(0);
 		System.out.println(
 				"We calculate how maintenance REPAIR request had been made on the PNC_001 ATM, this should list 1");
