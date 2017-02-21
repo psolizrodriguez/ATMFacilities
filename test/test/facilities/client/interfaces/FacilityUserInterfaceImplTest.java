@@ -59,12 +59,11 @@ public class FacilityUserInterfaceImplTest {
 		assertEquals((Object) atmPNC_001.getCurrentAmount(), (Object) 490.0);
 		System.out.println("@Test assignFacilityToUse the ATM PNC_001 has a current amount of $490.0");
 
-
 	}
 
 	@Test
 	public void vacateFacility() {
-		//Need to make a test case where you have the ATM active and then perform a transaction
+		// Need to make a test case where you have the ATM active and then perform a transaction
 		ATM atmPNC_001 = bankLoader.getBankPNC().getAtms().get(0);
 		System.out.println("@Test assignFacilityToUse for ATM PNC_001");
 		assertEquals(atmPNC_001.isActive(), true);
@@ -89,16 +88,16 @@ public class FacilityUserInterfaceImplTest {
 	public void listInspections() {
 		System.out.println("@Test listInspections for ATM PNC_001");
 		ATM atmPNC_001 = bankLoader.getBankPNC().getAtms().get(0);
-		System.out.println("ATM PNC_001 Total Transactions size is " +atmPNC_001.getAtmTransactions().size());
-		assertEquals(facilityUserInterface.listInspections(atmPNC_001, "Deposit").size(),1);
+		System.out.println("ATM PNC_001 Total Transactions size is " + atmPNC_001.getAtmTransactions().size());
+		assertEquals(facilityUserInterface.listInspections(atmPNC_001, "Deposit").size(), 1);
 		System.out.println("ATM PNC_001 Deposit Transactions Size = 1");
-		assertEquals(facilityUserInterface.listInspections(atmPNC_001, "Withdraw").size(),1);
+		assertEquals(facilityUserInterface.listInspections(atmPNC_001, "Withdraw").size(), 1);
 		System.out.println("ATM PNC_001 Withdraw Transactions Size = 1");
-		assertEquals(facilityUserInterface.listInspections(atmPNC_001, "PINValidation").size(),1);
+		assertEquals(facilityUserInterface.listInspections(atmPNC_001, "PINValidation").size(), 1);
 		System.out.println("ATM PNC_001 Deposit PINValidation Size = 1");
-		assertEquals(facilityUserInterface.listInspections(atmPNC_001, "Transfer").size(),1);
+		assertEquals(facilityUserInterface.listInspections(atmPNC_001, "Transfer").size(), 1);
 		System.out.println("ATM PNC_001 Deposit Transfer Size = 1");
-		assertEquals(facilityUserInterface.listInspections(atmPNC_001, "Query").size(),0);
+		assertEquals(facilityUserInterface.listInspections(atmPNC_001, "Query").size(), 0);
 		System.out.println("ATM PNC_001 Deposit Query Size = 0");
 
 	}

@@ -29,7 +29,7 @@ public class FacilityMaintenanceInterfaceImpl implements FacilityMaintenanceInte
 		Double total = 0.0;
 		if (listMaintenanceRequest != null && listMaintenanceRequest.size() > 0) {
 			for (MaintenanceRequest maintenanceRequest : listMaintenanceRequest) {
-				if (maintenanceRequest.getAtm().equals(atm)) {
+				if (maintenanceRequest.getMaintenanceOrder() != null && maintenanceRequest.getAtm().equals(atm)) {
 					total += maintenanceRequest.getMaintenanceOrder().getMaintenanceCost().getCost();
 				}
 			}
@@ -42,7 +42,7 @@ public class FacilityMaintenanceInterfaceImpl implements FacilityMaintenanceInte
 		long total = 0;
 		if (listMaintenanceRequest != null && listMaintenanceRequest.size() > 0) {
 			for (MaintenanceRequest maintenanceRequest : listMaintenanceRequest) {
-				if (maintenanceRequest.getAtm().equals(atm)) {
+				if (maintenanceRequest.getMaintenanceOrder() != null && maintenanceRequest.getAtm().equals(atm)) {
 					total++;
 				}
 			}
@@ -55,7 +55,7 @@ public class FacilityMaintenanceInterfaceImpl implements FacilityMaintenanceInte
 		long total = 0;
 		if (listMaintenanceRequest != null && listMaintenanceRequest.size() > 0) {
 			for (MaintenanceRequest maintenanceRequest : listMaintenanceRequest) {
-				if (maintenanceRequest.getAtm().equals(atm)) {
+				if (maintenanceRequest.getMaintenanceOrder() != null && maintenanceRequest.getAtm().equals(atm)) {
 					total += maintenanceRequest.getMaintenanceOrder().getMaintenanceCost().getRequiredHours();
 				}
 			}
@@ -68,7 +68,7 @@ public class FacilityMaintenanceInterfaceImpl implements FacilityMaintenanceInte
 		List<MaintenanceRequest> result = new ArrayList<>();
 		if (listMaintenanceRequest != null && listMaintenanceRequest.size() > 0) {
 			for (MaintenanceRequest maintenanceRequest : listMaintenanceRequest) {
-				if (maintenanceRequest.isClosed()) {
+				if (maintenanceRequest.getAtm().equals(atm)) {
 					result.add(maintenanceRequest);
 				}
 			}
@@ -78,12 +78,12 @@ public class FacilityMaintenanceInterfaceImpl implements FacilityMaintenanceInte
 	}
 
 	@Override
-	// List all Maintenance Orders in a Specific ATM
+	// List all Maintenance Requests in a Specific ATM
 	public List<MaintenanceRequest> listMaintenance(ATM atm, List<MaintenanceRequest> listMaintenanceRequest) {
 		List<MaintenanceRequest> result = new ArrayList<>();
 		if (listMaintenanceRequest != null && listMaintenanceRequest.size() > 0) {
 			for (MaintenanceRequest maintenanceRequest : listMaintenanceRequest) {
-				if (maintenanceRequest.getAtm().equals(atm)) {
+				if (maintenanceRequest.isClosed() && maintenanceRequest.getAtm().equals(atm)) {
 					result.add(maintenanceRequest);
 				}
 			}
@@ -97,7 +97,7 @@ public class FacilityMaintenanceInterfaceImpl implements FacilityMaintenanceInte
 		List<MaintenanceRequest> result = new ArrayList<>();
 		if (listMaintenanceRequest != null && listMaintenanceRequest.size() > 0) {
 			for (MaintenanceRequest maintenanceRequest : listMaintenanceRequest) {
-				if (maintenanceRequest.getMaintenanceType().equals(maintenanceType)) {
+				if (maintenanceRequest.isClosed() && maintenanceRequest.getMaintenanceType().equals(maintenanceType)) {
 					result.add(maintenanceRequest);
 				}
 			}
