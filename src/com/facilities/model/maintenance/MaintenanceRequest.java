@@ -13,6 +13,16 @@ public abstract class MaintenanceRequest {
 	private int averageHours;
 	private Double averageCost;
 	private String maintenanceType;
+	private MaintenanceOrder maintenanceOrder;
+
+	public MaintenanceOrder getMaintenanceOrder() {
+		return maintenanceOrder;
+	}
+
+	public void setMaintenanceOrder(MaintenanceOrder maintenanceOrder) {
+		this.maintenanceOrder = maintenanceOrder;
+	}
+
 	private List<MaintenanceCost> listMaintenanceCost;
 
 	public String getMaintenanceType() {

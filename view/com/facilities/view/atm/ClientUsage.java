@@ -1,52 +1,33 @@
 package com.facilities.view.atm;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Properties;
 
-import javax.swing.JFormattedTextField.AbstractFormatter;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-
-import org.jdatepicker.JDatePicker;
-import org.jdatepicker.impl.JDatePanelImpl;
-import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.UtilDateModel;
 
 import com.facilities.client.interfaces.FacilityUserInterface;
 import com.facilities.client.interfacesImpl.FacilityUserInterfaceImpl;
 import com.facilities.commons.utils.ATMLoader;
 import com.facilities.commons.utils.ATMTransactionsLoader;
 import com.facilities.commons.utils.BankLoader;
-import com.facilities.commons.utils.CommonsUtils;
 import com.facilities.model.atm.ATM;
-
-import sun.util.calendar.JulianCalendar;
-
-import java.awt.GridBagLayout;
-
-import javax.swing.JLabel;
-
-import java.awt.GridBagConstraints;
-
-import javax.swing.JTextField;
-
-import java.awt.Insets;
-
-import javax.swing.JComboBox;
-import javax.swing.JButton;
-import javax.swing.AbstractAction;
-import javax.swing.JOptionPane;
-
-import java.awt.event.ActionEvent;
-
-import javax.swing.Action;
 
 public class ClientUsage extends JFrame {
 
@@ -57,6 +38,7 @@ public class ClientUsage extends JFrame {
 	private BankLoader bankLoader;
 	private FacilityUserInterface user;
 	private JComboBox comboBox;
+
 	/**
 	 * Launch the application.
 	 */
@@ -83,22 +65,22 @@ public class ClientUsage extends JFrame {
 		setBounds(100, 100, 663, 251);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		
+
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{0, 0, 0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
-		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.columnWidths = new int[] { 0, 0, 0, 0, 0 };
+		gbl_contentPane.rowHeights = new int[] { 0, 0, 0, 0, 0, 0 };
+		gbl_contentPane.columnWeights = new double[] { 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
+		gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		contentPane.setLayout(gbl_contentPane);
-		
+
 		JLabel lblNewLabel = new JLabel("From Date in 24 Hour Format dd-MM-yyyy hh:mm:ss");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel.gridx = 0;
 		gbc_lblNewLabel.gridy = 0;
 		contentPane.add(lblNewLabel, gbc_lblNewLabel);
-		
+
 		textField = new JTextField();
 		textField.setToolTipText("From Date");
 		GridBagConstraints gbc_textField = new GridBagConstraints();
@@ -108,14 +90,14 @@ public class ClientUsage extends JFrame {
 		gbc_textField.gridy = 0;
 		contentPane.add(textField, gbc_textField);
 		textField.setColumns(10);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("To Date in 24 Hour Format dd-MM-yyyy hh:mm:ss");
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
 		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_1.gridx = 0;
 		gbc_lblNewLabel_1.gridy = 1;
 		contentPane.add(lblNewLabel_1, gbc_lblNewLabel_1);
-		
+
 		textField_1 = new JTextField();
 		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
 		gbc_textField_1.insets = new Insets(0, 0, 5, 0);
@@ -124,15 +106,22 @@ public class ClientUsage extends JFrame {
 		gbc_textField_1.gridy = 1;
 		contentPane.add(textField_1, gbc_textField_1);
 		textField_1.setColumns(10);
-		
+
 		JLabel lblNewLabel_2 = new JLabel("Select ATM Facility");
 		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
 		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_2.gridx = 0;
 		gbc_lblNewLabel_2.gridy = 2;
 		contentPane.add(lblNewLabel_2, gbc_lblNewLabel_2);
-		
-		ArrayList<ATM> atmsList = new ArrayList<ATM>() { { addAll(bankLoader.getBankPNC().getAtms()); addAll(bankLoader.getBankOfAmerica().getAtms()); addAll(ATMLoader.getCBATMList()); addAll(ATMLoader.getCHASEATMList());} };
+
+		ArrayList<ATM> atmsList = new ArrayList<ATM>() {
+			{
+				addAll(bankLoader.getBankPNC().getAtms());
+				addAll(bankLoader.getBankOfAmerica().getAtms());
+				addAll(ATMLoader.getCBATMList());
+				addAll(ATMLoader.getCHASEATMList());
+			}
+		};
 		comboBox = new JComboBox(atmsList.toArray());
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.insets = new Insets(0, 0, 5, 0);
@@ -141,7 +130,7 @@ public class ClientUsage extends JFrame {
 		gbc_comboBox.gridy = 2;
 		comboBox.setRenderer(new ComboBoxRenderer());
 		contentPane.add(comboBox, gbc_comboBox);
-		
+
 		JButton btnNewButton = new JButton("Usage Check");
 		btnNewButton.setAction(action);
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
@@ -149,10 +138,10 @@ public class ClientUsage extends JFrame {
 		gbc_btnNewButton.gridy = 4;
 		contentPane.add(btnNewButton, gbc_btnNewButton);
 	}
-	
-	private Calendar textToCalendar(String data){
+
+	private Calendar textToCalendar(String data) {
 		DateFormat df = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
-		Calendar cal  = Calendar.getInstance();
+		Calendar cal = Calendar.getInstance();
 		try {
 			cal.setTime(df.parse(data));
 		} catch (ParseException e) {
@@ -161,26 +150,28 @@ public class ClientUsage extends JFrame {
 		}
 		return cal;
 	}
-	
-	
+
 	private class SwingAction extends AbstractAction {
 		public SwingAction() {
 			putValue(NAME, "Usage Check");
 			putValue(SHORT_DESCRIPTION, "Some short description");
 		}
+
 		public void actionPerformed(ActionEvent e) {
 			user = new FacilityUserInterfaceImpl();
-	        ATM atm = (ATM)comboBox.getSelectedItem();
-	        
-	       if(user.isInUseDuringInterval(atm, textToCalendar(textField.getText()), textToCalendar(textField_1.getText()))){
-	    	   JOptionPane.showMessageDialog(contentPane.getComponent(0), "The ATM : "+ atm.getAtmId()+ " was used during these interval");
-	    	   
-	       }
-	       else{
-	    	   JOptionPane.showMessageDialog(contentPane.getComponent(0), "The ATM : "+ atm.getAtmId()+ " was not used during these interval");
+			ATM atm = (ATM) comboBox.getSelectedItem();
 
-	       }
-	        
+			if (user.isInUseDuringInterval(atm, textToCalendar(textField.getText()),
+					textToCalendar(textField_1.getText()))) {
+				JOptionPane.showMessageDialog(contentPane.getComponent(0),
+						"The ATM : " + atm.getAtmId() + " was used during these interval");
+
+			} else {
+				JOptionPane.showMessageDialog(contentPane.getComponent(0),
+						"The ATM : " + atm.getAtmId() + " was not used during these interval");
+
+			}
+
 		}
 	}
 }

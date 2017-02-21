@@ -12,6 +12,11 @@ public class ServiceProvider {
 	private int rating;
 	private List<Address> listAddress;
 
+	public ServiceProvider(String legalName, int rating) {
+		this.legalName = legalName;
+		this.rating = rating;
+	}
+
 	public String getLegalName() {
 		return legalName;
 	}
@@ -43,7 +48,7 @@ public class ServiceProvider {
 	}
 
 	public boolean generateMaintainingSchedule(MaintenanceCost maintenanceCost, MaintenanceRequest maintenanceRequest) {
-		MaintenanceOrder maintenanceOrder = new MaintenanceOrder(maintenanceRequest, maintenanceCost);
+		MaintenanceOrder maintenanceOrder = new MaintenanceOrder(maintenanceCost);
 		List<MaintenanceSchedule> listMaintenanceSchedule = new ArrayList<>();
 		Calendar startDate = CommonsUtils.copyCalendar(maintenanceCost.getStartMaintenance());
 		Calendar endDate = CommonsUtils.copyCalendar(maintenanceCost.getStartMaintenance());
@@ -52,6 +57,7 @@ public class ServiceProvider {
 			listMaintenanceSchedule.add(new MaintenanceSchedule(startDate, endDate, "Hour " + (i + 1)));
 		}
 		maintenanceOrder.setListMaintenanceSchedule(listMaintenanceSchedule);
+		maintenanceRequest.setMaintenanceOrder(maintenanceOrder);
 		return true;
 	}
 

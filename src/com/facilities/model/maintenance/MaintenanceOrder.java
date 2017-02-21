@@ -3,13 +3,11 @@ package com.facilities.model.maintenance;
 import java.util.List;
 
 public class MaintenanceOrder {
-	private MaintenanceRequest maintenanceRequest;
 	private MaintenanceCost maintenanceCost;
 	private String orderStatus;
 	private List<MaintenanceSchedule> listMaintenanceSchedule;
 
-	public MaintenanceOrder(MaintenanceRequest maintenanceRequest, MaintenanceCost maintenanceCost) {
-		this.maintenanceRequest = maintenanceRequest;
+	public MaintenanceOrder(MaintenanceCost maintenanceCost) {
 		this.maintenanceCost = maintenanceCost;
 	}
 
@@ -19,14 +17,6 @@ public class MaintenanceOrder {
 
 	public void setMaintenanceCost(MaintenanceCost maintenanceCost) {
 		this.maintenanceCost = maintenanceCost;
-	}
-
-	public MaintenanceRequest getMaintenanceRequest() {
-		return maintenanceRequest;
-	}
-
-	public void setMaintenanceRequest(MaintenanceRequest maintenanceRequest) {
-		this.maintenanceRequest = maintenanceRequest;
 	}
 
 	public String getOrderStatus() {

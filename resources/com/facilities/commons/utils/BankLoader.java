@@ -29,13 +29,11 @@ public class BankLoader {
 		bankOfAmerica.setAtms(ATMLoader.getBOAATMList());
 		bankOfAmerica.setDebitCards(CardLoader.getBOACards());
 
-
 		bankCitibank = new Bank();
 		bankCitibank.setAtms(ATMLoader.getCBATMList());
 		chaseBank = new Bank();
 		chaseBank.setAtms(ATMLoader.getCBATMList());
-		
-		
+
 	}
 
 	public Bank getBankPNC() {
@@ -62,7 +60,7 @@ public class BankLoader {
 		this.bankCitibank = bankCitibank;
 	}
 
-	public HashMap<String, List<ATM>> getBankLists(){
+	public HashMap<String, List<ATM>> getBankLists() {
 		HashMap<String, List<ATM>> banks = new HashMap<>();
 		banks.put("PNC", bankPNC.getAtms());
 		banks.put("Bank Of America", bankOfAmerica.getAtms());
