@@ -45,7 +45,15 @@ public class FacilityUserInterfaceImpl implements FacilityUserInterface {
 	@Override
 	public List<ATMTransaction> listInspections(ATM atm, String transactionType) {
 		List<ATMTransaction> result = new ArrayList<>();
+		List<ATMTransaction> listATMTransaction = atm.getAtmTransactions();
+		if( listATMTransaction != null && listATMTransaction.size() >0){
 		//Have to look in the transactions for equals to the type in the string
+			for(ATMTransaction atmTransaction : listATMTransaction){
+				if(atmTransaction.getTransactionType().equals(transactionType)){
+					result.add(atmTransaction);
+				}
+			}
+		}
 		return result;
 	}
 

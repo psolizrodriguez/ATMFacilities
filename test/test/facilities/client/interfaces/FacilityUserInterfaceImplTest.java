@@ -35,13 +35,15 @@ public class FacilityUserInterfaceImplTest {
 	public void isInUseDuringInterval() {
 		ATM PNC_001 = bankLoader.getBankPNC().getAtms().get(0);
 		System.out.println("@Test isInUseDuringInterval()");
-		System.out.println("ATM was not in use from 09:30:00 02-18-2017 to 10:30:00 02-18-2017");
 		Calendar fromTime = CommonsUtils.getCalendar(02, 18, 2017, 12, 30, 00, 1);
 		Calendar toTime = CommonsUtils.getCalendar(02, 18, 2017, 14, 59, 00, 1);
 		assertEquals(facilityUserInterface.isInUseDuringInterval(PNC_001, fromTime, toTime), true);
+		System.out.println("ATM was in use from 12:30:00 02-18-2017 to 14:59:00 02-18-2017");
 		fromTime = CommonsUtils.getCalendar(02, 18, 2017, 9, 30, 00, 1);
 		toTime = CommonsUtils.getCalendar(02, 18, 2017, 10, 30, 00, 1);
 		assertEquals(facilityUserInterface.isInUseDuringInterval(PNC_001, fromTime, toTime), false);
+		System.out.println("ATM was not in use from 09:30:00 02-18-2017 to 10:30:00 02-18-2017");
+
 	}
 
 	@Test
@@ -53,7 +55,11 @@ public class FacilityUserInterfaceImplTest {
 		ATMTransaction withdrawFromAccount = new WithdrawlTransaction(checkingAccount, debitCard,
 				CommonsUtils.getCalendar(02, 18, 2017, 13, 20, 0, 0), 10.0);
 		assertEquals(facilityUserInterface.assignFacilityToUse(atmPNC_001, withdrawFromAccount), true);
+		System.out.println("@Test assignFacilityToUse the ATM PNC_001 is now assigned to use");
 		assertEquals((Object) atmPNC_001.getCurrentAmount(), (Object) 490.0);
+		System.out.println("@Test assignFacilityToUse the ATM PNC_001 has a current amount of $490.0");
+
+
 	}
 
 	@Test
@@ -81,7 +87,20 @@ public class FacilityUserInterfaceImplTest {
 
 	@Test
 	public void listInspections() {
-		//Please do the test case for this
+		System.out.println("@Test listInspections for ATM PNC_001");
+		ATM atmPNC_001 = bankLoader.getBankPNC().getAtms().get(0);
+		System.out.println("ATM PNC_001 Total Transactions size is " +atmPNC_001.getAtmTransactions().size());
+		assertEquals(facilityUserInterface.listInspections(atmPNC_001, "Deposit").size(),1);
+		System.out.println("ATM PNC_001 Deposit Transactions Size = 1");
+		assertEquals(facilityUserInterface.listInspections(atmPNC_001, "Withdraw").size(),1);
+		System.out.println("ATM PNC_001 Withdraw Transactions Size = 1");
+		assertEquals(facilityUserInterface.listInspections(atmPNC_001, "PINValidation").size(),1);
+		System.out.println("ATM PNC_001 Deposit PINValidation Size = 1");
+		assertEquals(facilityUserInterface.listInspections(atmPNC_001, "Transfer").size(),1);
+		System.out.println("ATM PNC_001 Deposit Transfer Size = 1");
+		assertEquals(facilityUserInterface.listInspections(atmPNC_001, "Query").size(),0);
+		System.out.println("ATM PNC_001 Deposit Query Size = 0");
+
 	}
 
 	@Test

@@ -202,11 +202,15 @@ public class FacilityClientInterfaceImplTest {
 		ATMTransaction withdrawFromAccount = new WithdrawlTransaction(checkingAccount, debitCard,
 				CommonsUtils.getCalendar(02, 18, 2017, 12, 20, 0,0), 500.0);
 		assertEquals(facilityClientInterface.addFacilityDetail(atmPNC_001, withdrawFromAccount), false);
+		System.out.println("@Test requestAvailableCapacity the ATM PNC_001 is unavailable for a withdaw transaction with a capacity of $0.0");
 		assertEquals(facilityClientInterface.requestAvailableCapacity(atmPNC_001), (Object) 0.0);
 		ATMTransaction depositToAccount = new DepositTransaction(checkingAccount, debitCard,
 				CommonsUtils.getCalendar(02, 18, 2017, 12, 30, 0,0), 1000.0);
+		System.out.println("@Test requestAvailableCapacity deposited an ammount of $1000 into ATM PNC_001");
 		assertEquals(facilityClientInterface.addFacilityDetail(atmPNC_001, depositToAccount), true);
 		assertEquals(facilityClientInterface.requestAvailableCapacity(atmPNC_001), (Object) 1000.0);
+		System.out.println("@Test requestAvailableCapacity the ATM PNC_001 has now an available capacity of $1000");
+
 	}
 
 	/**
@@ -218,6 +222,8 @@ public class FacilityClientInterfaceImplTest {
 		ATM atmPNC_001 = bankLoader.getBankPNC().getAtms().get(0);
 		String printFormat = "ATM [atmId=PNC_001, limit=20000.0, currentAmount=0.0, active=true, atmTransactions=null, address=Address [addressId=ADDRESS_1, street=26 E Pearson St, unit=1, city=Chicago, state=IL, zip=60611]]";
 		assertEquals(facilityClientInterface.getFacilityInformation(atmPNC_001).getTextToPrint(), printFormat);
+		System.out.println("@Test testGetFacilityInformation for ATM PNC_001 = " + printFormat);
+
 	}
 
 	@Test
@@ -227,6 +233,7 @@ public class FacilityClientInterfaceImplTest {
 		ATM atmPNC_001 = bankLoader.getBankPNC().getAtms().get(0);
 		assertEquals(facilityClientInterface.removeFacility(bankPNC, atmPNC_001), true);
 		assertEquals(facilityClientInterface.listFacilities(bankLoader.getBankPNC()).size(), 3);
+		System.out.println("@Test testRemoveFacility worked and now the size of facility is reduced to 3");
 	}
 
 
