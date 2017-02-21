@@ -14,6 +14,7 @@ public class QueryTransaction extends ATMTransaction {
 		super(card, startTime);
 		this.account = account;
 		setAverageMinutes(5);
+		setTransactionType("Query");
 	}
 
 	public boolean processTransaction(ATM atm) {

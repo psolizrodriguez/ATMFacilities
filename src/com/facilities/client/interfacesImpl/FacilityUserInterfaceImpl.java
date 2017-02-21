@@ -1,12 +1,12 @@
 package com.facilities.client.interfacesImpl;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import com.facilities.client.interfaces.FacilityUserInterface;
 import com.facilities.commons.utils.CommonsUtils;
 import com.facilities.model.atm.ATM;
-import com.facilities.model.maintenance.MaintenanceOrder;
 import com.facilities.model.service.ATMTransaction;
 
 public class FacilityUserInterfaceImpl implements FacilityUserInterface {
@@ -43,9 +43,10 @@ public class FacilityUserInterfaceImpl implements FacilityUserInterface {
 	}
 
 	@Override
-	public List<MaintenanceOrder> listInspections(ATM atm) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ATMTransaction> listInspections(ATM atm, String transactionType) {
+		List<ATMTransaction> result = new ArrayList<>();
+		//Have to look in the transactions for equals to the type in the string
+		return result;
 	}
 
 	@Override

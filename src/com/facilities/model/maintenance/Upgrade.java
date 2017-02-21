@@ -9,6 +9,7 @@ public class Upgrade extends MaintenanceRequest {
 		super(atm, description);
 		this.setAverageHours(1);
 		this.setAverageCost(700.0);
+		this.setMaintenanceType("UPGRADE");
 	}
 
 	@Override

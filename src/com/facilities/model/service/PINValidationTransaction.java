@@ -13,6 +13,7 @@ public class PINValidationTransaction extends ATMTransaction {
 		super(card, startTime);
 		this.pinNumber = pinNumber;
 		setAverageMinutes(3);
+		setTransactionType("PINValidation");
 	}
 
 	public boolean processTransaction(ATM atm) {

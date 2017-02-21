@@ -16,6 +16,7 @@ public class WithdrawlTransaction extends ATMTransaction {
 		this.card = card;
 		this.amount = amount;
 		setAverageMinutes(5);
+		setTransactionType("Withdraw");
 	}
 
 	public boolean processTransaction(ATM atm) {

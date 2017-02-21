@@ -9,6 +9,7 @@ public class Replenish extends MaintenanceRequest {
 		super(atm, description);
 		this.setAverageHours(2);
 		this.setAverageCost(500.0);
+		this.setMaintenanceType("REPLENISH");
 	}
 
 	@Override

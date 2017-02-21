@@ -9,6 +9,7 @@ public class Repair extends MaintenanceRequest {
 		super(atm, description);
 		this.setAverageHours(8);
 		this.setAverageCost(2000.0);
+		this.setMaintenanceType("REPAIR");
 	}
 
 	@Override

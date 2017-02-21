@@ -5,7 +5,13 @@ import java.util.List;
 public class MaintenanceOrder {
 	private MaintenanceRequest maintenanceRequest;
 	private MaintenanceCost maintenanceCost;
-	private int orderStatus;
+	private String orderStatus;
+	private List<MaintenanceSchedule> listMaintenanceSchedule;
+
+	public MaintenanceOrder(MaintenanceRequest maintenanceRequest, MaintenanceCost maintenanceCost) {
+		this.maintenanceRequest = maintenanceRequest;
+		this.maintenanceCost = maintenanceCost;
+	}
 
 	public MaintenanceCost getMaintenanceCost() {
 		return maintenanceCost;
@@ -15,8 +21,6 @@ public class MaintenanceOrder {
 		this.maintenanceCost = maintenanceCost;
 	}
 
-	private List<MaintenanceSchedule> listMaintenanceSchedule;
-
 	public MaintenanceRequest getMaintenanceRequest() {
 		return maintenanceRequest;
 	}
@@ -25,11 +29,11 @@ public class MaintenanceOrder {
 		this.maintenanceRequest = maintenanceRequest;
 	}
 
-	public int getOrderStatus() {
+	public String getOrderStatus() {
 		return orderStatus;
 	}
 
-	public void setOrderStatus(int orderStatus) {
+	public void setOrderStatus(String orderStatus) {
 		this.orderStatus = orderStatus;
 	}
 

@@ -10,6 +10,7 @@ public class Diagnostic extends MaintenanceRequest {
 		super(atm, description);
 		this.setAverageHours(4);
 		this.setAverageCost(1000.0);
+		this.setMaintenanceType("DIAGNOSTIC");
 	}
 
 	@Override

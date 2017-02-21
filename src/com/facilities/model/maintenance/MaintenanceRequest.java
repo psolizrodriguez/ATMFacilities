@@ -8,11 +8,20 @@ import com.facilities.model.atm.ATM;
 
 public abstract class MaintenanceRequest {
 	private String description;
-	private boolean open;
+	private boolean closed;
 	private ATM atm;
 	private int averageHours;
 	private Double averageCost;
+	private String maintenanceType;
 	private List<MaintenanceCost> listMaintenanceCost;
+
+	public String getMaintenanceType() {
+		return maintenanceType;
+	}
+
+	public void setMaintenanceType(String maintenanceType) {
+		this.maintenanceType = maintenanceType;
+	}
 
 	public int getAverageHours() {
 		return averageHours;
@@ -43,12 +52,12 @@ public abstract class MaintenanceRequest {
 		this.description = description;
 	}
 
-	public boolean isOpen() {
-		return open;
+	public boolean isClosed() {
+		return closed;
 	}
 
-	public void setOpen(boolean open) {
-		this.open = open;
+	public void setClosed(boolean closed) {
+		this.closed = closed;
 	}
 
 	public ATM getAtm() {

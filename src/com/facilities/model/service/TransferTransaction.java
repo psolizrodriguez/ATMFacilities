@@ -17,6 +17,7 @@ public class TransferTransaction extends ATMTransaction {
 		this.amount = amount;
 		this.transferTo = transferTo;
 		setAverageMinutes(10);
+		setTransactionType("Transfer");
 	}
 
 	@Override

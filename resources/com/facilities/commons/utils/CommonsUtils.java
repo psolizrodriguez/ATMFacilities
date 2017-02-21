@@ -17,6 +17,18 @@ public class CommonsUtils {
 		return date;
 	}
 
+	public static Calendar copyCalendar(Calendar target) {
+		Calendar date = Calendar.getInstance();
+		date.set(Calendar.YEAR, target.get(Calendar.YEAR));
+		date.set(Calendar.MONTH, target.get(Calendar.MONTH));
+		date.set(Calendar.DAY_OF_MONTH, target.get(Calendar.DAY_OF_MONTH));
+		date.set(Calendar.HOUR, target.get(Calendar.HOUR));
+		date.set(Calendar.MINUTE, target.get(Calendar.MINUTE));
+		date.set(Calendar.SECOND, target.get(Calendar.SECOND));
+
+		return date;
+	}
+
 	public static Calendar getFinalizationTime(Calendar calendar, int minutes) {
 		Calendar date = Calendar.getInstance();
 		date.set(Calendar.YEAR, calendar.get(Calendar.YEAR));
@@ -46,7 +58,7 @@ public class CommonsUtils {
 	public static long minutesBetween(Calendar startDate, Calendar endDate) {
 		return ChronoUnit.MINUTES.between(startDate.toInstant(), endDate.toInstant());
 	}
-	
+
 	public static long hoursBetween(Calendar startDate, Calendar endDate) {
 		return ChronoUnit.HOURS.between(startDate.toInstant(), endDate.toInstant());
 	}

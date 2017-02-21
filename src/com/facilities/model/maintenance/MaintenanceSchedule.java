@@ -8,6 +8,12 @@ public class MaintenanceSchedule {
 	private String description;
 	private int status;
 
+	public MaintenanceSchedule(Calendar startMaintenance, Calendar endMaintenance, String description) {
+		this.startMaintenance = startMaintenance;
+		this.endMaintenance = endMaintenance;
+		this.description = description;
+	}
+
 	public Calendar getStartMaintenance() {
 		return startMaintenance;
 	}

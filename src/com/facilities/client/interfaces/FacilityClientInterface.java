@@ -8,20 +8,21 @@ import com.facilities.model.atm.Bank;
 import com.facilities.model.service.ATMTransaction;
 
 public interface FacilityClientInterface {
-	public List<ATM> listFacilities(Bank bank);// List ATMs
+	// List ATMs
+	public List<ATM> listFacilities(Bank bank);
 
-	public PrinterHelper getFacilityInformation(ATM atm); // Print ATM
-															// Information
+	// Print ATM Information
+	public PrinterHelper getFacilityInformation(ATM atm);
 
-	public Double requestAvailableCapacity(ATM atm); // Print money left in ATM
+	// Print money left in ATM
+	public Double requestAvailableCapacity(ATM atm);
 
-	public boolean addNewFacility(Bank bank, ATM atm);// Add new ATM to Bank
+	// Add new ATM to Bank
+	public boolean addNewFacility(Bank bank, ATM atm);
 
-	public boolean addFacilityDetail(ATM atm, ATMTransaction atmTransaction);// Perform
-																			// transactions
-																			// to
-																			// the
-																			// ATM
+	// Perform transactions to the ATM
+	public boolean addFacilityDetail(ATM atm, ATMTransaction atmTransaction);
 
-	public boolean removeFacility(Bank bank, ATM atm);// Delete ATM from Bank
+	// Delete ATM from Bank
+	public boolean removeFacility(Bank bank, ATM atm);
 }

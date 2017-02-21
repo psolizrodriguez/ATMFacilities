@@ -12,9 +12,18 @@ public abstract class ATMTransaction {
 	private Calendar startTime;
 	private Calendar endTime;
 	private int averageMinutes;
+	private String transactionType;
+
+	public String getTransactionType() {
+		return transactionType;
+	}
+
+	public void setTransactionType(String transactionType) {
+		this.transactionType = transactionType;
+	}
 
 	public ATMTransaction(Card card, Calendar startTime) {
-		
+
 		this.card = card;
 		this.startTime = startTime;
 	}

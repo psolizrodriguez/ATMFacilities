@@ -80,7 +80,7 @@ public class FacilityUserInterfaceImplTest {
 
 	@Test
 	public void listInspections() {
-		//Need to finish maintenance for this, skip it for now.
+		//Please do the test case for this
 	}
 
 	@Test

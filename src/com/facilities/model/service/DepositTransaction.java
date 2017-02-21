@@ -15,6 +15,7 @@ public class DepositTransaction extends ATMTransaction {
 		this.account = account;
 		this.amountDeposit = amountDeposit;
 		setAverageMinutes(10);
+		setTransactionType("Deposit");
 	}
 
 	public Double getAmountDeposit() {

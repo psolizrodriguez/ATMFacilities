@@ -67,4 +67,12 @@ public class MaintenanceCost {
 	public void setServiceProvider(ServiceProvider serviceProvider) {
 		this.serviceProvider = serviceProvider;
 	}
+
+	public boolean acceptMaintenance(MaintenanceRequest maintenanceRequest) {
+
+		if (!maintenanceRequest.isClosed() && serviceProvider.generateMaintainingSchedule(this, maintenanceRequest)) {
+			maintenanceRequest.setClosed(true);
+		}
+		return maintenanceRequest.isClosed();
+	}
 }
