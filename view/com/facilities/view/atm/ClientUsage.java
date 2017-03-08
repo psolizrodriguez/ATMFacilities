@@ -82,6 +82,7 @@ public class ClientUsage extends JFrame {
 		contentPane.add(lblNewLabel, gbc_lblNewLabel);
 
 		textField = new JTextField();
+		textField.setText("18-02-2017 23:30:00");
 		textField.setToolTipText("From Date");
 		GridBagConstraints gbc_textField = new GridBagConstraints();
 		gbc_textField.insets = new Insets(0, 0, 5, 0);
@@ -99,6 +100,7 @@ public class ClientUsage extends JFrame {
 		contentPane.add(lblNewLabel_1, gbc_lblNewLabel_1);
 
 		textField_1 = new JTextField();
+		textField_1.setText("18-02-2017 24:30:00");
 		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
 		gbc_textField_1.insets = new Insets(0, 0, 5, 0);
 		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
