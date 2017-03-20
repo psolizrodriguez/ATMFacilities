@@ -1,71 +1,31 @@
 package com.facilities.model.customer;
 
-public class Address {
+public interface Address {
 
-		private String addressId;
-		private String street;
-		private String unit;
-		private String city;
-		private String state;
-		private String zip;
-		
-		public Address() {}
-		
-		public Address(String addressId, String street, String unit, String city, String state, String zip){
-			this.addressId = addressId;
-			this.street = street;
-			this.unit = unit;
-			this.city = city;
-			this.state = state;
-			this.zip = zip;
-		}
-			
-		
-		public String getAddressId() {
-			return addressId;
-		}
-		
-		public void setAddressId(String addressId) {
-			this.addressId = addressId;
-		}
-		
-		public String getStreet() {
-			return street;
-		}
-		public void setStreet(String street) {
-			this.street = street;
-		}
-		public String getUnit() {
-			return unit;
-		}
-		public void setUnit(String unit) {
-			this.unit = unit;
-		}
-		public String getCity() {
-			return city;
-		}
-		public void setCity(String city) {
-			this.city = city;
-		}
-		public String getState() {
-			return state;
-		}
-		public void setState(String state) {
-			this.state = state;
-		}
-		public String getZip() {
-			return zip;
-		}
-		public void setZip(String zip) {
-			this.zip = zip;
-		}
+	public String getAddressId();
 
-		@Override
-		public String toString() {
-			return "Address [addressId=" + addressId + ", street=" + street
-					+ ", unit=" + unit + ", city=" + city + ", state=" + state
-					+ ", zip=" + zip + "]";
-		}
-		
-		
+	public void setAddressId(String addressId);
+
+	public String getStreet();
+
+	public void setStreet(String street);
+
+	public String getUnit();
+
+	public void setUnit(String unit);
+
+	public String getCity();
+
+	public void setCity(String city);
+
+	public String getState();
+
+	public void setState(String state);
+
+	public String getZip();
+
+	public void setZip(String zip);
+
+	public String toString();
+
 }

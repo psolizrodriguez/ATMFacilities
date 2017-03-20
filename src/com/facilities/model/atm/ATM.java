@@ -1,105 +1,41 @@
 package com.facilities.model.atm;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.facilities.model.customer.Address;
 import com.facilities.model.service.ATMTransaction;
 
-public class ATM {
+public interface ATM {
 
-	private String atmId;
-	private Double limit;
-	private Double currentAmount;
-	private boolean active;
-	private List<ATMTransaction> atmTransactions;
-	private Address address;
+	public boolean addBalance(Double amount);
 
-	public ATM(String atmId, Double limit, Double currentAmount, boolean active, Address address) {
-		this.atmId = atmId;
-		this.limit = limit;
-		this.currentAmount = currentAmount;
-		this.active = active;
-		this.address = address;
-	}
+	public boolean substractBalance(Double amount);
 
-	public boolean addBalance(Double amount) {
-		currentAmount += amount;
-		return true;
-	}
+	public Double getLimit();
 
-	public boolean substractBalance(Double amount) {
-		if (currentAmount >= amount) {
-			currentAmount -= amount;
-			return true;
-		}
-		return false;
-	}
+	public void setLimit(Double limit);
 
-	public Double getLimit() {
-		return limit;
-	}
+	public Double getCurrentAmount();
 
-	public void setLimit(Double limit) {
-		this.limit = limit;
-	}
+	public void setCurrentAmount(Double currentAmount);
 
-	public Double getCurrentAmount() {
-		return currentAmount;
-	}
+	public boolean isActive();
 
-	public void setCurrentAmount(Double currentAmount) {
-		this.currentAmount = currentAmount;
-	}
+	public void setActive(boolean active);
 
-	public boolean isActive() {
-		return active;
-	}
+	public String getAtmId();
 
-	public void setActive(boolean active) {
-		this.active = active;
-	}
+	public void setAtmId(String atmId);
 
-	public String getAtmId() {
-		return atmId;
-	}
+	public Address getAddress();
 
-	public void setAtmId(String atmId) {
-		this.atmId = atmId;
-	}
+	public void setAddress(Address address);
 
-	public Address getAddress() {
-		return address;
-	}
+	public List<ATMTransaction> getAtmTransactions();
 
-	public void setAddress(Address address) {
-		this.address = address;
-	}
+	public void setAtmTransactions(List<ATMTransaction> atmTransactions);
 
-	public List<ATMTransaction> getAtmTransactions() {
-		return atmTransactions;
-	}
+	public boolean performTransaction(ATMTransaction aTMTransaction);
 
-	public void setAtmTransactions(List<ATMTransaction> atmTransactions) {
-		this.atmTransactions = atmTransactions;
-	}
-
-	public boolean performTransaction(ATMTransaction aTMTransaction) {
-		if (active) {
-			if (aTMTransaction.processTransaction(this)) {
-				if (atmTransactions == null) {
-					atmTransactions = new ArrayList<>();
-				}
-				atmTransactions.add(aTMTransaction);
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public String toString() {
-		return "ATM [atmId=" + atmId + ", limit=" + limit + ", currentAmount=" + currentAmount + ", active=" + active
-				+ ", atmTransactions=" + atmTransactions + ", address=" + address + "]";
-	}
+	public String toString();
 }

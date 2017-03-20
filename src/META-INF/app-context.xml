@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<description>Wiring the dependencies</description>
+
+	<context:component-scan base-package="com.facilities" />
+	<!-- We create the Customers -->
+	<bean id="CommonsUtils" class="com.facilities.commons.utils.CommonsUtils"
+		scope="prototype" />
+
+	<!-- We create the Addresses -->
+	<bean id="atm_PNC_001_ADDRESS" class="com.facilities.model.customer.AddressImpl"
+		scope="prototype">
+		<constructor-arg name="addressId">
+			<value>ADDRESS_1</value>
+		</constructor-arg>
+		<constructor-arg name="street">
+			<value>26 E Pearson St</value>
+		</constructor-arg>
+		<constructor-arg name="unit">
+			<value>1</value>
+		</constructor-arg>
+		<constructor-arg name="city">
+			<value>Chicago</value>
+		</constructor-arg>
+		<constructor-arg name="state">
+			<value>IL</value>
+		</constructor-arg>
+		<constructor-arg name="zip">
+			<value>60611</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="atm_PNC_002_ADDRESS" class="com.facilities.model.customer.AddressImpl"
+		scope="prototype">
+		<constructor-arg name="addressId">
+			<value>ADDRESS_2</value>
+		</constructor-arg>
+		<constructor-arg name="street">
+			<value>1068 W Granville Ave</value>
+		</constructor-arg>
+		<constructor-arg name="unit">
+			<value>2</value>
+		</constructor-arg>
+		<constructor-arg name="city">
+			<value>Chicago</value>
+		</constructor-arg>
+		<constructor-arg name="state">
+			<value>IL</value>
+		</constructor-arg>
+		<constructor-arg name="zip">
+			<value>60660</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="atm_PNC_003_ADDRESS" class="com.facilities.model.customer.AddressImpl"
+		scope="prototype">
+		<constructor-arg name="addressId">
+			<value>ADDRESS_3</value>
+		</constructor-arg>
+		<constructor-arg name="street">
+			<value>4309 S Morgan St</value>
+		</constructor-arg>
+		<constructor-arg name="unit">
+			<value>3</value>
+		</constructor-arg>
+		<constructor-arg name="city">
+			<value>Chicago</value>
+		</constructor-arg>
+		<constructor-arg name="state">
+			<value>IL</value>
+		</constructor-arg>
+		<constructor-arg name="zip">
+			<value>60609</value>
+		</constructor-arg>
+	</bean>
+	<bean id="atm_PNC_004_ADDRESS" class="com.facilities.model.customer.AddressImpl"
+		scope="prototype">
+		<constructor-arg name="addressId">
+			<value>ADDRESS_4</value>
+		</constructor-arg>
+		<constructor-arg name="street">
+			<value>13 Garden St</value>
+		</constructor-arg>
+		<constructor-arg name="unit">
+			<value>4</value>
+		</constructor-arg>
+		<constructor-arg name="city">
+			<value>Chicago</value>
+		</constructor-arg>
+		<constructor-arg name="state">
+			<value>IL</value>
+		</constructor-arg>
+		<constructor-arg name="zip">
+			<value>60661</value>
+		</constructor-arg>
+	</bean>
+
+
+	<!-- Create the ATMs List -->
+
+
+	<bean id="atm_PNC_001" class="com.facilities.model.atm.ATMImpl"
+		scope="prototype">
+		<constructor-arg name="atmId">
+			<value>PNC_001</value>
+		</constructor-arg>
+		<constructor-arg name="limit">
+			<value>20000.0</value>
+		</constructor-arg>
+		<constructor-arg name="currentAmount">
+			<value>0.0</value>
+		</constructor-arg>
+		<constructor-arg name="active">
+			<value>true</value>
+		</constructor-arg>
+		<constructor-arg name="address" ref="atm_PNC_001_ADDRESS" />
+	</bean>
+
+	<bean id="atm_PNC_002" class="com.facilities.model.atm.ATMImpl"
+		scope="prototype">
+		<constructor-arg name="atmId">
+			<value>PNC_002</value>
+		</constructor-arg>
+		<constructor-arg name="limit">
+			<value>20000.0</value>
+		</constructor-arg>
+		<constructor-arg name="currentAmount">
+			<value>100000.0</value>
+		</constructor-arg>
+		<constructor-arg name="active">
+			<value>true</value>
+		</constructor-arg>
+		<constructor-arg name="address" ref="atm_PNC_002_ADDRESS" />
+	</bean>
+
+	<bean id="atm_PNC_003" class="com.facilities.model.atm.ATMImpl"
+		scope="prototype">
+		<constructor-arg name="atmId">
+			<value>PNC_003</value>
+		</constructor-arg>
+		<constructor-arg name="limit">
+			<value>30000.0</value>
+		</constructor-arg>
+		<constructor-arg name="currentAmount">
+			<value>6600000.0</value>
+		</constructor-arg>
+		<constructor-arg name="active">
+			<value>true</value>
+		</constructor-arg>
+		<constructor-arg name="address" ref="atm_PNC_003_ADDRESS" />
+	</bean>
+	<bean id="atm_PNC_004" class="com.facilities.model.atm.ATMImpl"
+		scope="prototype">
+		<constructor-arg name="atmId">
+			<value>PNC_004</value>
+		</constructor-arg>
+		<constructor-arg name="limit">
+			<value>50000.0</value>
+		</constructor-arg>
+		<constructor-arg name="currentAmount">
+			<value>55000.0</value>
+		</constructor-arg>
+		<constructor-arg name="active">
+			<value>true</value>
+		</constructor-arg>
+		<constructor-arg name="address" ref="atm_PNC_004_ADDRESS" />
+	</bean>
+	<!-- We create List of ATMs -->
+	<bean id="atmList_PNC" class="java.util.ArrayList" scope="prototype">
+		<constructor-arg>
+			<list>
+				<ref bean="atm_PNC_001" />
+				<ref bean="atm_PNC_002" />
+				<ref bean="atm_PNC_003" />
+				<ref bean="atm_PNC_004" />
+			</list>
+		</constructor-arg>
+	</bean>
+	
+
+	<!-- We create the Customers -->
+	<bean id="customer_001" class="com.facilities.model.customer.CustomerImpl"
+		scope="prototype">
+		<constructor-arg name="customerId">
+			<value>CUST001</value>
+		</constructor-arg>
+		<constructor-arg name="lastName">
+			<value>SOLIZ</value>
+		</constructor-arg>
+		<constructor-arg name="firstName">
+			<value>PERCY</value>
+		</constructor-arg>
+		<constructor-arg name="billingAddress" ref="atm_PNC_001_ADDRESS" />
+		<constructor-arg name="shippingAddress" ref="atm_PNC_001_ADDRESS" />
+	</bean>
+	<!-- We create the Accounts -->
+	<bean id="customer_001_checking_account" class="com.facilities.model.customer.CheckingAccount"
+		scope="prototype">
+		<constructor-arg name="owner" ref="customer_001" />
+		<constructor-arg name="accountNumber">
+			<value>0000001</value>
+		</constructor-arg>
+		<constructor-arg name="balance">
+			<value>0.0</value>
+		</constructor-arg>
+	</bean>
+	<bean id="customer_001_saving_account" class="com.facilities.model.customer.CheckingAccount"
+		scope="prototype">
+		<constructor-arg name="owner" ref="customer_001" />
+		<constructor-arg name="accountNumber">
+			<value>0000002</value>
+		</constructor-arg>
+		<constructor-arg name="balance">
+			<value>0.0</value>
+		</constructor-arg>
+	</bean>
+	<bean id="customer_001_accounts_list" class="java.util.ArrayList"
+		scope="prototype">
+		<constructor-arg>
+			<list>
+				<ref bean="customer_001_checking_account" />
+				<ref bean="customer_001_saving_account" />
+			</list>
+		</constructor-arg>
+	</bean>
+	<!-- We create the PNC cards -->
+	<bean id="customer_001_saving_account_debitCard" class="com.facilities.model.customer.DebitCard"
+		scope="prototype">
+		<constructor-arg name="owner" ref="customer_001" />
+		<constructor-arg name="cardNumber">
+			<value>0000001</value>
+		</constructor-arg>
+		<constructor-arg name="pinNumber">
+			<value>1111</value>
+		</constructor-arg>
+		<constructor-arg name="securityCode">
+			<value>001</value>
+		</constructor-arg>
+		<constructor-arg name="validDate"
+			value="#{CommonsUtils.getCalendar(12, 31, 2020, 0, 0, 0,0)}" />
+		<constructor-arg name="address" ref="atm_PNC_001_ADDRESS" />
+		<constructor-arg name="accounts" ref="customer_001_accounts_list" />
+	</bean>
+	<!-- We create the list of Cards -->
+	<bean id="bankPNC_cards_list" class="java.util.ArrayList" scope="prototype">
+		<constructor-arg>
+			<list>
+				<ref bean="customer_001_saving_account_debitCard" />
+			</list>
+		</constructor-arg>
+	</bean>
+	<!-- We create the list of Cards -->
+	<bean id="bankPNC" class="com.facilities.model.atm.BankImpl"
+		scope="prototype">
+		<property name="atms" ref="atmList_PNC" />
+		<property name="debitCards" ref="bankPNC_cards_list" />
+	</bean>
+</beans>

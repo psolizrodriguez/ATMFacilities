@@ -15,6 +15,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
 import javax.swing.border.EmptyBorder;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
 
@@ -39,7 +43,9 @@ public class ClientCalculaion extends JFrame {
 	 * Create the frame.
 	 */
 	public ClientCalculaion(final String arg) {
-		bankLoader = new BankLoader();
+		ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/app-context.xml");
+		System.out.println("***************** Application Context instantiated! ******************");
+		bankLoader = new BankLoader(context);
 		ATMTransactionsLoader.loadTransactionsPNC(bankLoader.getBankPNC());
 		ATMTransactionsLoader.loadTransactionsBOA(bankLoader.getBankOfAmerica());
 		label = new JLabel("Select the Facility");		

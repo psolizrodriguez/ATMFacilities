@@ -1,48 +1,22 @@
 package com.facilities.model.customer;
 
-public abstract class Account {
-	private Customer owner;
-	private String type;
-	private String accountNumber;
-	private Double balance;
+public interface Account {
 
-	public Account(Customer owner, String accountNumber, Double balance) {
-		this.owner = owner;
-		this.accountNumber = accountNumber;
-		this.balance = balance;
-	}
+	public Customer getOwner();
 
-	public Customer getOwner() {
-		return owner;
-	}
+	public void setOwner(Customer owner);
 
-	public void setOwner(Customer owner) {
-		this.owner = owner;
-	}
+	public String getType();
 
-	public String getType() {
-		return type;
-	}
+	public void setType(String type);
 
-	public void setType(String type) {
-		this.type = type;
-	}
+	public String getAccountNumber();
 
-	public String getAccountNumber() {
-		return accountNumber;
-	}
+	public void setAccountNumber(String accountNumber);
 
-	public void setAccountNumber(String accountNumber) {
-		this.accountNumber = accountNumber;
-	}
+	public Double getBalance();
 
-	public Double getBalance() {
-		return balance;
-	}
-
-	public void setBalance(Double balance) {
-		this.balance = balance;
-	}
+	public void setBalance(Double balance);
 
 	public abstract boolean credit(Double ammount);
 

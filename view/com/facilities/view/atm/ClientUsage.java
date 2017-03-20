@@ -22,6 +22,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import com.facilities.client.interfaces.FacilityUserInterface;
 import com.facilities.client.interfacesImpl.FacilityUserInterfaceImpl;
 import com.facilities.commons.utils.ATMLoader;
@@ -59,7 +62,9 @@ public class ClientUsage extends JFrame {
 	 * Create the frame.
 	 */
 	public ClientUsage() {
-		bankLoader = new BankLoader();
+		ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/app-context.xml");
+		System.out.println("***************** Application Context instantiated! ******************");
+		bankLoader = new BankLoader(context);
 		ATMTransactionsLoader.loadTransactionsPNC(bankLoader.getBankPNC());
 		ATMTransactionsLoader.loadTransactionsBOA(bankLoader.getBankOfAmerica());
 		setBounds(100, 100, 663, 251);

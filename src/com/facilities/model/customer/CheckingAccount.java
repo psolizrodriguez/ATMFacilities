@@ -1,10 +1,49 @@
 package com.facilities.model.customer;
 
-public class CheckingAccount extends Account {
+public class CheckingAccount implements Account {
+
+	private Customer owner;
+	private String type;
+	private String accountNumber;
+	private Double balance;
 
 	public CheckingAccount(Customer owner, String accountNumber, Double balance) {
-		super(owner, accountNumber, balance);
-		setType("Checking");
+		this.owner = owner;
+		this.accountNumber = accountNumber;
+		this.balance = balance;
+		this.type = "Checking";
+	}
+
+	public Customer getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Customer owner) {
+		this.owner = owner;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getAccountNumber() {
+		return accountNumber;
+	}
+
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+
+	public Double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(Double balance) {
+		this.balance = balance;
 	}
 
 	@Override

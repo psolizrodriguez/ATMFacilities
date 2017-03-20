@@ -3,8 +3,11 @@ package com.facilities.commons.utils;
 import java.util.HashMap;
 import java.util.List;
 
+import org.springframework.context.ApplicationContext;
+
 import com.facilities.model.atm.ATM;
 import com.facilities.model.atm.Bank;
+import com.facilities.model.atm.BankImpl;
 
 public class BankLoader {
 	private Bank bankPNC;
@@ -20,19 +23,17 @@ public class BankLoader {
 		this.chaseBank = chaseBank;
 	}
 
-	public BankLoader() {
-		bankPNC = new Bank();
-		bankPNC.setAtms(ATMLoader.getPNCATMList());
-		bankPNC.setDebitCards(CardLoader.getPNCCards());
+	public BankLoader(ApplicationContext context) {
+		bankPNC = (BankImpl) context.getBean("bankPNC");
 
-		bankOfAmerica = new Bank();
+		/*bankOfAmerica = new BankImpl();
 		bankOfAmerica.setAtms(ATMLoader.getBOAATMList());
 		bankOfAmerica.setDebitCards(CardLoader.getBOACards());
 
-		bankCitibank = new Bank();
+		bankCitibank = new BankImpl();
 		bankCitibank.setAtms(ATMLoader.getCBATMList());
-		chaseBank = new Bank();
-		chaseBank.setAtms(ATMLoader.getCBATMList());
+		chaseBank = new BankImpl();
+		chaseBank.setAtms(ATMLoader.getCBATMList());*/
 
 	}
 

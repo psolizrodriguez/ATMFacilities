@@ -6,6 +6,8 @@ import java.util.Calendar;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.facilities.client.interfaces.FacilityUserInterface;
 import com.facilities.client.interfacesImpl.FacilityUserInterfaceImpl;
@@ -26,8 +28,10 @@ public class FacilityUserInterfaceImplTest {
 
 	@Before
 	public void initialize() {
+		ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/app-context.xml");
+		System.out.println("***************** Application Context instantiated! ******************");
 		facilityUserInterface = new FacilityUserInterfaceImpl();
-		bankLoader = new BankLoader();
+		bankLoader = new BankLoader(context);
 		ATMTransactionsLoader.loadTransactionsPNC(bankLoader.getBankPNC());
 	}
 

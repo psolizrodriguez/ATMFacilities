@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.facilities.client.interfaces.FacilityMaintenanceInterface;
 import com.facilities.client.interfacesImpl.FacilityMaintenanceInterfaceImpl;
@@ -29,8 +31,10 @@ public class FacilityMaintenanceInterfaceImplTest {
 
 	@Before
 	public void initialize() {
+		ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/app-context.xml");
+		System.out.println("***************** Application Context instantiated! ******************");
 		facilityMaintenanceInterface = new FacilityMaintenanceInterfaceImpl();
-		bankLoader = new BankLoader();
+		bankLoader = new BankLoader(context);
 		serviceProviderLoader = new ServiceProviderLoader();
 		listMaintenanceRequest = MaintenanceOrdersLoader.getCreateMaintenanceOrdersForPNCATM(bankLoader.getBankPNC());
 	}
