@@ -26,9 +26,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.facilities.client.interfaces.FacilityUserInterface;
+import com.facilities.client.interfacesImpl.FacilityClientInterfaceImpl;
 import com.facilities.client.interfacesImpl.FacilityUserInterfaceImpl;
-import com.facilities.commons.utils.ATMLoader;
-import com.facilities.commons.utils.ATMTransactionsLoader;
 import com.facilities.commons.utils.BankLoader;
 import com.facilities.model.atm.ATM;
 
@@ -38,7 +37,6 @@ public class ClientUsage extends JFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 	private final Action action = new SwingAction();
-	private BankLoader bankLoader;
 	private FacilityUserInterface user;
 	private JComboBox comboBox;
 
@@ -64,9 +62,8 @@ public class ClientUsage extends JFrame {
 	public ClientUsage() {
 		ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/app-context.xml");
 		System.out.println("***************** Application Context instantiated! ******************");
-		bankLoader = new BankLoader(context);
-		ATMTransactionsLoader.loadTransactionsPNC(bankLoader.getBankPNC());
-		ATMTransactionsLoader.loadTransactionsBOA(bankLoader.getBankOfAmerica());
+		BankLoader.loadTransactionsPNC(BankLoader.getBankPNC(context), context,
+				(FacilityClientInterfaceImpl) context.getBean("facilityClientInterface"));
 		setBounds(100, 100, 663, 251);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -123,10 +120,8 @@ public class ClientUsage extends JFrame {
 
 		ArrayList<ATM> atmsList = new ArrayList<ATM>() {
 			{
-				addAll(bankLoader.getBankPNC().getAtms());
-				addAll(bankLoader.getBankOfAmerica().getAtms());
-				addAll(ATMLoader.getCBATMList());
-				addAll(ATMLoader.getCHASEATMList());
+				addAll(BankLoader.getBankPNC(context).getAtms());
+
 			}
 		};
 		comboBox = new JComboBox(atmsList.toArray());

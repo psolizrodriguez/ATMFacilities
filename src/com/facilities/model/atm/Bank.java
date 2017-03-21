@@ -18,4 +18,8 @@ public interface Bank {
 
 	public void setAtms(List<ATM> atms);
 
+	public String getBankName();
+
+	public void setBankName(String bankName);
+
 }

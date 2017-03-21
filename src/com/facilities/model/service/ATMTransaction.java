@@ -6,67 +6,31 @@ import com.facilities.model.atm.ATM;
 import com.facilities.model.customer.Account;
 import com.facilities.model.customer.Card;
 
-public abstract class ATMTransaction {
-	Account account;
-	Card card;
-	private Calendar startTime;
-	private Calendar endTime;
-	private int averageMinutes;
-	private String transactionType;
+public interface ATMTransaction {
 
-	public String getTransactionType() {
-		return transactionType;
-	}
+	public String getTransactionType();
 
-	public void setTransactionType(String transactionType) {
-		this.transactionType = transactionType;
-	}
+	public void setTransactionType(String transactionType);
 
-	public ATMTransaction(Card card, Calendar startTime) {
+	public int getAverageMinutes();
 
-		this.card = card;
-		this.startTime = startTime;
-	}
+	public void setAverageMinutes(int averageMinutes);
 
-	public int getAverageMinutes() {
-		return averageMinutes;
-	}
+	public Calendar getStartTime();
 
-	public void setAverageMinutes(int averageMinutes) {
-		this.averageMinutes = averageMinutes;
-	}
+	public void setStartTime(Calendar startTime);
 
-	public Calendar getStartTime() {
-		return startTime;
-	}
+	public Calendar getEndTime();
 
-	public void setStartTime(Calendar startTime) {
-		this.startTime = startTime;
-	}
+	public void setEndTime(Calendar endTime);
 
-	public Calendar getEndTime() {
-		return endTime;
-	}
+	public Card getCard();
 
-	public void setEndTime(Calendar endTime) {
-		this.endTime = endTime;
-	}
+	public void setCard(Card card);
 
-	public Card getCard() {
-		return card;
-	}
+	public Account getAccount();
 
-	public void setCard(Card card) {
-		this.card = card;
-	}
+	public void setAccount(Account account);
 
-	public Account getAccount() {
-		return account;
-	}
-
-	public void setAccount(Account account) {
-		this.account = account;
-	}
-
-	public abstract boolean processTransaction(ATM atm);
+	public boolean processTransaction(ATM atm);
 }

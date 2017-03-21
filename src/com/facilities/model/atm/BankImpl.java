@@ -3,13 +3,22 @@ package com.facilities.model.atm;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.facilities.model.customer.Customer;
 import com.facilities.model.customer.Card;
+import com.facilities.model.customer.Customer;
 
-public class BankImpl implements Bank{
+public class BankImpl implements Bank {
 	private List<ATM> atms = new ArrayList<ATM>();
 	private List<Card> debitCards = new ArrayList<Card>();
 	private List<Customer> customers = new ArrayList<Customer>();
+	private String bankName;
+
+	public String getBankName() {
+		return bankName;
+	}
+
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
+	}
 
 	public List<Customer> getCustomers() {
 		return customers;

@@ -22,7 +22,6 @@ public class FacilityClientInterfaceImpl implements FacilityClientInterface {
 	}
 
 	public Double requestAvailableCapacity(ATM atm) {
-
 		return atm.getCurrentAmount();
 	}
 

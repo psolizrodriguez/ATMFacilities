@@ -3,7 +3,7 @@ package com.facilities.view.atm;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.AbstractAction;
@@ -18,12 +18,12 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.facilities.commons.utils.BankLoader;
 import com.facilities.model.atm.ATM;
+import com.facilities.model.atm.Bank;
 
 public class Main {
 
 	private JFrame frmCompProject;
 	private final Action action = new SwingAction();
-	private BankLoader bankLoader;
 	private final Action usageRate = new usageRateAction();
 	private final Action actualUsage = new actualUsageAction();
 	private final Action checkUsage = new checkUsageAction();
@@ -57,7 +57,6 @@ public class Main {
 	private void initialize() {
 		ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/app-context.xml");
 		System.out.println("***************** Application Context instantiated! ******************");
-		bankLoader = new BankLoader(context);
 		frmCompProject = new JFrame();
 		frmCompProject.setTitle("COMP 477 Project 1");
 		frmCompProject.setBounds(100, 100, 663, 511);
@@ -85,16 +84,17 @@ public class Main {
 		mnUserInterface.add(mntmCheckUsage);
 
 		JMenu mntmBanks;
-		HashMap<String, List<ATM>> values = bankLoader.getBankLists();
+		List<Bank> listBank = new ArrayList();
+		listBank.add(BankLoader.getBankPNC(context));
 
-		for (String value : bankLoader.toString().split(",")) {
-			mntmBanks = new JMenu(value);
+		for (Bank bank : listBank) {
+			mntmBanks = new JMenu(bank.getBankName());
 			mntmBanks.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					System.out.println("here");
 				}
 			});
-			for (final ATM atm : values.get(value)) {
+			for (final ATM atm : bank.getAtms()) {
 				JMenuItem mntmATMs = new JMenuItem(atm.getAtmId());
 				mntmBanks.add(mntmATMs);
 				mntmATMs.addActionListener(new ActionListener() {
@@ -104,7 +104,7 @@ public class Main {
 					}
 				});
 			}
-			mntmBanks.setText(value);
+			mntmBanks.setText(bank.getBankName());
 			mnBanks.add(mntmBanks);
 		}
 

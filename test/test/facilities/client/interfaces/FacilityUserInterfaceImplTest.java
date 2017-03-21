@@ -10,11 +10,12 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.facilities.client.interfaces.FacilityUserInterface;
+import com.facilities.client.interfacesImpl.FacilityClientInterfaceImpl;
 import com.facilities.client.interfacesImpl.FacilityUserInterfaceImpl;
-import com.facilities.commons.utils.ATMTransactionsLoader;
 import com.facilities.commons.utils.BankLoader;
 import com.facilities.commons.utils.CommonsUtils;
 import com.facilities.model.atm.ATM;
+import com.facilities.model.atm.Bank;
 import com.facilities.model.customer.Account;
 import com.facilities.model.customer.Card;
 import com.facilities.model.service.ATMTransaction;
@@ -24,20 +25,22 @@ import com.facilities.model.service.WithdrawlTransaction;
 public class FacilityUserInterfaceImplTest {
 
 	private FacilityUserInterface facilityUserInterface;
-	private BankLoader bankLoader;
+	ApplicationContext context;
+	Bank pncBank;
 
 	@Before
 	public void initialize() {
-		ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/app-context.xml");
+		context = new ClassPathXmlApplicationContext("META-INF/app-context.xml");
 		System.out.println("***************** Application Context instantiated! ******************");
-		facilityUserInterface = new FacilityUserInterfaceImpl();
-		bankLoader = new BankLoader(context);
-		ATMTransactionsLoader.loadTransactionsPNC(bankLoader.getBankPNC());
+		facilityUserInterface = (FacilityUserInterfaceImpl) context.getBean("facilityUserInterface");
+		pncBank = BankLoader.getBankPNC(context);
+		BankLoader.loadTransactionsPNC(pncBank, context,
+				(FacilityClientInterfaceImpl) context.getBean("facilityClientInterface"));
 	}
 
 	@Test
 	public void isInUseDuringInterval() {
-		ATM PNC_001 = bankLoader.getBankPNC().getAtms().get(0);
+		ATM PNC_001 = pncBank.getAtms().get(0);
 		System.out.println("@Test isInUseDuringInterval()");
 		Calendar fromTime = CommonsUtils.getCalendar(02, 18, 2017, 12, 30, 00, 1);
 		Calendar toTime = CommonsUtils.getCalendar(02, 18, 2017, 14, 59, 00, 1);
@@ -52,9 +55,9 @@ public class FacilityUserInterfaceImplTest {
 
 	@Test
 	public void assignFacilityToUse() {
-		ATM atmPNC_001 = bankLoader.getBankPNC().getAtms().get(0);
+		ATM atmPNC_001 = pncBank.getAtms().get(0);
 		System.out.println("@Test assignFacilityToUse for ATM PNC_001");
-		Card debitCard = bankLoader.getBankPNC().getDebitCards().get(0);
+		Card debitCard = pncBank.getDebitCards().get(0);
 		Account checkingAccount = debitCard.getAccounts().get(0);
 		ATMTransaction withdrawFromAccount = new WithdrawlTransaction(checkingAccount, debitCard,
 				CommonsUtils.getCalendar(02, 18, 2017, 13, 20, 0, 0), 10.0);
@@ -68,11 +71,11 @@ public class FacilityUserInterfaceImplTest {
 	@Test
 	public void vacateFacility() {
 		// Need to make a test case where you have the ATM active and then perform a transaction
-		ATM atmPNC_001 = bankLoader.getBankPNC().getAtms().get(0);
+		ATM atmPNC_001 = pncBank.getAtms().get(0);
 		System.out.println("@Test assignFacilityToUse for ATM PNC_001");
 		assertEquals(atmPNC_001.isActive(), true);
 		System.out.println("ATM PNC_001 is active");
-		Card debitCard = bankLoader.getBankPNC().getDebitCards().get(0);
+		Card debitCard = pncBank.getDebitCards().get(0);
 		Account checkingAccount = debitCard.getAccounts().get(0);
 		ATMTransaction withdrawFromAccount = new WithdrawlTransaction(checkingAccount, debitCard,
 				CommonsUtils.getCalendar(02, 18, 2017, 13, 20, 0, 0), 10.0);
@@ -91,7 +94,7 @@ public class FacilityUserInterfaceImplTest {
 	@Test
 	public void listInspections() {
 		System.out.println("@Test listInspections for ATM PNC_001");
-		ATM atmPNC_001 = bankLoader.getBankPNC().getAtms().get(0);
+		ATM atmPNC_001 = pncBank.getAtms().get(0);
 		System.out.println("ATM PNC_001 Total Transactions size is " + atmPNC_001.getAtmTransactions().size());
 		assertEquals(facilityUserInterface.listInspections(atmPNC_001, "Deposit").size(), 1);
 		System.out.println("ATM PNC_001 Deposit Transactions Size = 1");
@@ -108,7 +111,7 @@ public class FacilityUserInterfaceImplTest {
 
 	@Test
 	public void listActualUsage() {
-		ATM atmPNC_001 = bankLoader.getBankPNC().getAtms().get(0);
+		ATM atmPNC_001 = pncBank.getAtms().get(0);
 		System.out.println("@Test listActualUsage for ATM PNC_001");
 		assertEquals(facilityUserInterface.listActualUsage(atmPNC_001), 28);
 		System.out.println("ATM PNC_001 listActualUsage = = 28");
@@ -117,7 +120,7 @@ public class FacilityUserInterfaceImplTest {
 
 	@Test
 	public void calcUsageRate() {
-		ATM atmPNC_001 = bankLoader.getBankPNC().getAtms().get(0);
+		ATM atmPNC_001 = pncBank.getAtms().get(0);
 		System.out.println("@Test calcUsageRate for ATM PNC_001");
 		assertEquals(facilityUserInterface.calcUsageRate(atmPNC_001), 7);
 		System.out.println("ATM PNC_001 calcUsageRate = 7");

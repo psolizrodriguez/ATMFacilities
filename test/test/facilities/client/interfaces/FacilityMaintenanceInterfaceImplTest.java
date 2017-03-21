@@ -2,6 +2,7 @@ package test.facilities.client.interfaces;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -14,9 +15,8 @@ import com.facilities.client.interfaces.FacilityMaintenanceInterface;
 import com.facilities.client.interfacesImpl.FacilityMaintenanceInterfaceImpl;
 import com.facilities.commons.utils.BankLoader;
 import com.facilities.commons.utils.CommonsUtils;
-import com.facilities.commons.utils.MaintenanceOrdersLoader;
-import com.facilities.commons.utils.ServiceProviderLoader;
 import com.facilities.model.atm.ATM;
+import com.facilities.model.atm.Bank;
 import com.facilities.model.maintenance.Diagnostic;
 import com.facilities.model.maintenance.MaintenanceCost;
 import com.facilities.model.maintenance.MaintenanceRequest;
@@ -25,18 +25,21 @@ import com.facilities.model.maintenance.ServiceProvider;
 
 public class FacilityMaintenanceInterfaceImplTest {
 	private FacilityMaintenanceInterface facilityMaintenanceInterface;
-	private BankLoader bankLoader;
-	private ServiceProviderLoader serviceProviderLoader;
 	private List<MaintenanceRequest> listMaintenanceRequest;
+	ApplicationContext context;
+	Bank pncBank;
 
 	@Before
 	public void initialize() {
-		ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/app-context.xml");
+		context = new ClassPathXmlApplicationContext("META-INF/app-context.xml");
 		System.out.println("***************** Application Context instantiated! ******************");
-		facilityMaintenanceInterface = new FacilityMaintenanceInterfaceImpl();
-		bankLoader = new BankLoader(context);
-		serviceProviderLoader = new ServiceProviderLoader();
-		listMaintenanceRequest = MaintenanceOrdersLoader.getCreateMaintenanceOrdersForPNCATM(bankLoader.getBankPNC());
+		facilityMaintenanceInterface = (FacilityMaintenanceInterfaceImpl) context
+				.getBean("facilityMaintenanceInterface");
+		;
+		pncBank = BankLoader.getBankPNC(context);
+		listMaintenanceRequest = (ArrayList) context.getBean("listMaintenanceRequest");
+		BankLoader.getCreateMaintenanceOrdersForPNCATM(listMaintenanceRequest, BankLoader.getBrinks(context),
+				BankLoader.getPls247(context));
 	}
 
 	// Method to make a Maintenance Request(refill, repair,etc)
@@ -47,7 +50,7 @@ public class FacilityMaintenanceInterfaceImplTest {
 	public void makeFacilityMaintRequestTest() {
 		System.out.println("\n@makeFacilityMaintRequestTest");
 		System.out.println("We get the PNC_001 atm and create a Diagnostic Maintenance Request");
-		ATM atmPNC_001 = bankLoader.getBankPNC().getAtms().get(0);
+		ATM atmPNC_001 = pncBank.getAtms().get(0);
 		MaintenanceRequest maintenanceRequest = new Diagnostic(atmPNC_001, "First Diagnostic Maintenenance");
 		assertEquals(maintenanceRequest != null, true);
 	}
@@ -59,9 +62,9 @@ public class FacilityMaintenanceInterfaceImplTest {
 	public void scheduleMaintenanceTest() {
 		System.out.println("\n@scheduleMaintenanceTest");
 		System.out.println("We get the PNC_001 atm and create a Diagnostic Maintenance Request");
-		ATM atmPNC_001 = bankLoader.getBankPNC().getAtms().get(0);
+		ATM atmPNC_001 = pncBank.getAtms().get(0);
 		MaintenanceRequest maintenanceRequest = new Diagnostic(atmPNC_001, "First Diagnostic Maintenenance");
-		ServiceProvider brinks = serviceProviderLoader.getBrinks();
+		ServiceProvider brinks = BankLoader.getBrinks(context);
 		Calendar startDate = CommonsUtils.getCalendar(02, 25, 2017, 2, 0, 0, 0);
 		Calendar endDate = CommonsUtils.getCalendar(02, 25, 2017, 6, 0, 0, 0);
 		System.out.println("We process the request and create the cost according to the provider Brinks");
@@ -87,7 +90,7 @@ public class FacilityMaintenanceInterfaceImplTest {
 	@Test
 	public void calcMaintenanceCostForFacilityTest() {
 		System.out.println("\n@calcMaintenanceCostForFacilityTest");
-		ATM atmPNC_001 = bankLoader.getBankPNC().getAtms().get(0);
+		ATM atmPNC_001 = pncBank.getAtms().get(0);
 		System.out.println("We calculate the cost of all the maintenance that has been done to the PNC_001 ATM");
 		System.out.println(
 				"Teh costs are 1000, 2000, 500, 700 and the rating of Brinks is 3, so we should have a total cost of 12600");
@@ -96,7 +99,7 @@ public class FacilityMaintenanceInterfaceImplTest {
 		System.out.println("We add one more Diagnostic Request");
 		MaintenanceRequest maintenanceRequest = new Diagnostic(atmPNC_001, "Second Diagnostic Maintenenance");
 		listMaintenanceRequest.add(maintenanceRequest);
-		ServiceProvider brinks = serviceProviderLoader.getBrinks();
+		ServiceProvider brinks = BankLoader.getBrinks(context);
 		Calendar startDate = CommonsUtils.getCalendar(02, 19, 2017, 2, 0, 0, 0);
 		Calendar endDate = CommonsUtils.getCalendar(02, 19, 2017, 6, 0, 0, 0);
 		maintenanceRequest.calculateCosts(brinks, startDate, endDate);
@@ -116,13 +119,13 @@ public class FacilityMaintenanceInterfaceImplTest {
 	@Test
 	public void calcProblemRateForFacilityTest() {
 		System.out.println("\n@calcProblemRateForFacilityTest");
-		ATM atmPNC_001 = bankLoader.getBankPNC().getAtms().get(0);
+		ATM atmPNC_001 = pncBank.getAtms().get(0);
 		System.out.println("We calculate how many times the PNC_001 ATM has been in maintenance, this should list 4");
 		assertEquals(facilityMaintenanceInterface.calcProblemRateForFacility(atmPNC_001, listMaintenanceRequest), 4);
 		System.out.println("We add one more Diagnostic Request");
 		MaintenanceRequest maintenanceRequest = new Diagnostic(atmPNC_001, "Second Diagnostic Maintenenance");
 		listMaintenanceRequest.add(maintenanceRequest);
-		ServiceProvider brinks = serviceProviderLoader.getBrinks();
+		ServiceProvider brinks = BankLoader.getBrinks(context);
 		Calendar startDate = CommonsUtils.getCalendar(02, 19, 2017, 2, 0, 0, 0);
 		Calendar endDate = CommonsUtils.getCalendar(02, 19, 2017, 6, 0, 0, 0);
 		maintenanceRequest.calculateCosts(brinks, startDate, endDate);
@@ -142,14 +145,14 @@ public class FacilityMaintenanceInterfaceImplTest {
 	@Test
 	public void calcDownTimeForFacilityTest() {
 		System.out.println("\n@calcDownTimeForFacilityTest");
-		ATM atmPNC_001 = bankLoader.getBankPNC().getAtms().get(0);
+		ATM atmPNC_001 = pncBank.getAtms().get(0);
 		System.out.println(
 				"We calculate how many hours the PNC_001 ATM has been under maintenance, (4,4,4,4) this should list 16");
 		assertEquals(facilityMaintenanceInterface.calcDownTimeForFacility(atmPNC_001, listMaintenanceRequest), 16);
 		System.out.println("We add one more Diagnostic Request, meaning 4 hours maintenance more");
 		MaintenanceRequest maintenanceRequest = new Diagnostic(atmPNC_001, "Second Diagnostic Maintenenance");
 		listMaintenanceRequest.add(maintenanceRequest);
-		ServiceProvider brinks = serviceProviderLoader.getBrinks();
+		ServiceProvider brinks = BankLoader.getBrinks(context);
 		Calendar startDate = CommonsUtils.getCalendar(02, 19, 2017, 2, 0, 0, 0);
 		Calendar endDate = CommonsUtils.getCalendar(02, 19, 2017, 6, 0, 0, 0);
 		maintenanceRequest.calculateCosts(brinks, startDate, endDate);
@@ -166,14 +169,14 @@ public class FacilityMaintenanceInterfaceImplTest {
 	@Test
 	public void listMaintRequestsTest() {
 		System.out.println("\n@listMaintRequestsTest");
-		ATM atmPNC_001 = bankLoader.getBankPNC().getAtms().get(0);
+		ATM atmPNC_001 = pncBank.getAtms().get(0);
 		System.out.println(
 				"We calculate how many maintenance request had been set on the PNC_001 ATM, this should list 4");
 		assertEquals(facilityMaintenanceInterface.listMaintRequests(atmPNC_001, listMaintenanceRequest).size(), 4);
 		System.out.println("We add one more Diagnostic Request, meaning 1 more request on the list");
 		MaintenanceRequest maintenanceRequest = new Diagnostic(atmPNC_001, "Second Diagnostic Maintenenance");
 		listMaintenanceRequest.add(maintenanceRequest);
-		ServiceProvider brinks = serviceProviderLoader.getBrinks();
+		ServiceProvider brinks = BankLoader.getBrinks(context);
 		Calendar startDate = CommonsUtils.getCalendar(02, 19, 2017, 2, 0, 0, 0);
 		Calendar endDate = CommonsUtils.getCalendar(02, 19, 2017, 6, 0, 0, 0);
 		maintenanceRequest.calculateCosts(brinks, startDate, endDate);
@@ -190,14 +193,14 @@ public class FacilityMaintenanceInterfaceImplTest {
 	@Test
 	public void listMaintenanceTest() {
 		System.out.println("\n@listMaintenanceTest");
-		ATM atmPNC_001 = bankLoader.getBankPNC().getAtms().get(0);
+		ATM atmPNC_001 = pncBank.getAtms().get(0);
 		System.out.println(
 				"We calculate how maintenance request had been processed on the PNC_001 ATM, this should list 4");
 		assertEquals(facilityMaintenanceInterface.listMaintenance(atmPNC_001, listMaintenanceRequest).size(), 4);
 		System.out.println("We add one more Diagnostic Request, meaning 1 more request on the list");
 		MaintenanceRequest maintenanceRequest = new Diagnostic(atmPNC_001, "Second Diagnostic Maintenenance");
 		listMaintenanceRequest.add(maintenanceRequest);
-		ServiceProvider brinks = serviceProviderLoader.getBrinks();
+		ServiceProvider brinks = BankLoader.getBrinks(context);
 		Calendar startDate = CommonsUtils.getCalendar(02, 19, 2017, 2, 0, 0, 0);
 		Calendar endDate = CommonsUtils.getCalendar(02, 19, 2017, 6, 0, 0, 0);
 		maintenanceRequest.calculateCosts(brinks, startDate, endDate);
@@ -220,7 +223,7 @@ public class FacilityMaintenanceInterfaceImplTest {
 	@Test
 	public void listFacilityProblemsTest() {
 		System.out.println("\n@listFacilityProblemsTest");
-		ATM atmPNC_001 = bankLoader.getBankPNC().getAtms().get(0);
+		ATM atmPNC_001 = pncBank.getAtms().get(0);
 		System.out.println(
 				"We calculate how maintenance REPAIR request had been made on the PNC_001 ATM, this should list 1");
 		assertEquals(
@@ -229,7 +232,7 @@ public class FacilityMaintenanceInterfaceImplTest {
 		System.out.println("We add one more Repair Request, meaning 1 more request on the list");
 		MaintenanceRequest maintenanceRequest = new Repair(atmPNC_001, "Second Repair Maintenenance");
 		listMaintenanceRequest.add(maintenanceRequest);
-		ServiceProvider brinks = serviceProviderLoader.getBrinks();
+		ServiceProvider brinks = BankLoader.getBrinks(context);
 		Calendar startDate = CommonsUtils.getCalendar(02, 19, 2017, 2, 0, 0, 0);
 		Calendar endDate = CommonsUtils.getCalendar(02, 19, 2017, 6, 0, 0, 0);
 		maintenanceRequest.calculateCosts(brinks, startDate, endDate);

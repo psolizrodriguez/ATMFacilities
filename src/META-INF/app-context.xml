@@ -9,11 +9,11 @@
 	<context:component-scan base-package="com.facilities" />
 	<!-- We create the Customers -->
 	<bean id="CommonsUtils" class="com.facilities.commons.utils.CommonsUtils"
-		scope="prototype" />
+		 />
 
 	<!-- We create the Addresses -->
 	<bean id="atm_PNC_001_ADDRESS" class="com.facilities.model.customer.AddressImpl"
-		scope="prototype">
+		>
 		<constructor-arg name="addressId">
 			<value>ADDRESS_1</value>
 		</constructor-arg>
@@ -35,7 +35,7 @@
 	</bean>
 
 	<bean id="atm_PNC_002_ADDRESS" class="com.facilities.model.customer.AddressImpl"
-		scope="prototype">
+		>
 		<constructor-arg name="addressId">
 			<value>ADDRESS_2</value>
 		</constructor-arg>
@@ -57,7 +57,7 @@
 	</bean>
 
 	<bean id="atm_PNC_003_ADDRESS" class="com.facilities.model.customer.AddressImpl"
-		scope="prototype">
+		>
 		<constructor-arg name="addressId">
 			<value>ADDRESS_3</value>
 		</constructor-arg>
@@ -78,7 +78,7 @@
 		</constructor-arg>
 	</bean>
 	<bean id="atm_PNC_004_ADDRESS" class="com.facilities.model.customer.AddressImpl"
-		scope="prototype">
+		>
 		<constructor-arg name="addressId">
 			<value>ADDRESS_4</value>
 		</constructor-arg>
@@ -104,7 +104,7 @@
 
 
 	<bean id="atm_PNC_001" class="com.facilities.model.atm.ATMImpl"
-		scope="prototype">
+		>
 		<constructor-arg name="atmId">
 			<value>PNC_001</value>
 		</constructor-arg>
@@ -121,7 +121,7 @@
 	</bean>
 
 	<bean id="atm_PNC_002" class="com.facilities.model.atm.ATMImpl"
-		scope="prototype">
+		>
 		<constructor-arg name="atmId">
 			<value>PNC_002</value>
 		</constructor-arg>
@@ -138,7 +138,7 @@
 	</bean>
 
 	<bean id="atm_PNC_003" class="com.facilities.model.atm.ATMImpl"
-		scope="prototype">
+		>
 		<constructor-arg name="atmId">
 			<value>PNC_003</value>
 		</constructor-arg>
@@ -154,7 +154,7 @@
 		<constructor-arg name="address" ref="atm_PNC_003_ADDRESS" />
 	</bean>
 	<bean id="atm_PNC_004" class="com.facilities.model.atm.ATMImpl"
-		scope="prototype">
+		>
 		<constructor-arg name="atmId">
 			<value>PNC_004</value>
 		</constructor-arg>
@@ -170,7 +170,7 @@
 		<constructor-arg name="address" ref="atm_PNC_004_ADDRESS" />
 	</bean>
 	<!-- We create List of ATMs -->
-	<bean id="atmList_PNC" class="java.util.ArrayList" scope="prototype">
+	<bean id="atmList_PNC" class="java.util.ArrayList" >
 		<constructor-arg>
 			<list>
 				<ref bean="atm_PNC_001" />
@@ -180,11 +180,11 @@
 			</list>
 		</constructor-arg>
 	</bean>
-	
+
 
 	<!-- We create the Customers -->
 	<bean id="customer_001" class="com.facilities.model.customer.CustomerImpl"
-		scope="prototype">
+		>
 		<constructor-arg name="customerId">
 			<value>CUST001</value>
 		</constructor-arg>
@@ -199,7 +199,7 @@
 	</bean>
 	<!-- We create the Accounts -->
 	<bean id="customer_001_checking_account" class="com.facilities.model.customer.CheckingAccount"
-		scope="prototype">
+		>
 		<constructor-arg name="owner" ref="customer_001" />
 		<constructor-arg name="accountNumber">
 			<value>0000001</value>
@@ -209,7 +209,7 @@
 		</constructor-arg>
 	</bean>
 	<bean id="customer_001_saving_account" class="com.facilities.model.customer.CheckingAccount"
-		scope="prototype">
+		>
 		<constructor-arg name="owner" ref="customer_001" />
 		<constructor-arg name="accountNumber">
 			<value>0000002</value>
@@ -219,7 +219,7 @@
 		</constructor-arg>
 	</bean>
 	<bean id="customer_001_accounts_list" class="java.util.ArrayList"
-		scope="prototype">
+		>
 		<constructor-arg>
 			<list>
 				<ref bean="customer_001_checking_account" />
@@ -229,7 +229,7 @@
 	</bean>
 	<!-- We create the PNC cards -->
 	<bean id="customer_001_saving_account_debitCard" class="com.facilities.model.customer.DebitCard"
-		scope="prototype">
+		>
 		<constructor-arg name="owner" ref="customer_001" />
 		<constructor-arg name="cardNumber">
 			<value>0000001</value>
@@ -246,7 +246,7 @@
 		<constructor-arg name="accounts" ref="customer_001_accounts_list" />
 	</bean>
 	<!-- We create the list of Cards -->
-	<bean id="bankPNC_cards_list" class="java.util.ArrayList" scope="prototype">
+	<bean id="bankPNC_cards_list" class="java.util.ArrayList" >
 		<constructor-arg>
 			<list>
 				<ref bean="customer_001_saving_account_debitCard" />
@@ -255,8 +255,113 @@
 	</bean>
 	<!-- We create the list of Cards -->
 	<bean id="bankPNC" class="com.facilities.model.atm.BankImpl"
-		scope="prototype">
+		>
 		<property name="atms" ref="atmList_PNC" />
 		<property name="debitCards" ref="bankPNC_cards_list" />
+		<property name="bankName">
+			<value>PNC</value>
+		</property>
 	</bean>
+	<!-- We create the list of Providers -->
+	<bean id="pls247" class="com.facilities.model.maintenance.ServiceProviderImpl"
+		>
+		<constructor-arg name="legalName">
+			<value>PLS247</value>
+		</constructor-arg>
+		<constructor-arg name="rating">
+			<value>3</value>
+		</constructor-arg>
+	</bean>
+	<bean id="brinks" class="com.facilities.model.maintenance.ServiceProviderImpl"
+		>
+		<constructor-arg name="legalName">
+			<value>BRINKS</value>
+		</constructor-arg>
+		<constructor-arg name="rating">
+			<value>3</value>
+		</constructor-arg>
+	</bean>
+	<!-- We create the transactions -->
+	<bean id="atm_PNC_001_pinValidation" class="com.facilities.model.service.PINValidationTransaction"
+		>
+		<constructor-arg name="card"
+			ref="customer_001_saving_account_debitCard" />
+		<constructor-arg name="startTime"
+			value="#{CommonsUtils.getCalendar(02, 18, 2017, 11, 10, 0, 1)}" />
+		<constructor-arg name="pinNumber" value="1111" />
+	</bean>
+	<bean id="atm_PNC_001_depositTransaction" class="com.facilities.model.service.DepositTransaction"
+		>
+		<constructor-arg name="account" ref="customer_001_checking_account" />
+		<constructor-arg name="card"
+			ref="customer_001_saving_account_debitCard" />
+		<constructor-arg name="startTime"
+			value="#{CommonsUtils.getCalendar(02, 18, 2017, 11, 21, 0, 1)}" />
+		<constructor-arg name="amountDeposit" value="1000.0" />
+	</bean>
+	<bean id="atm_PNC_001_withdrawlTransaction" class="com.facilities.model.service.WithdrawlTransaction"
+		>
+		<constructor-arg name="account" ref="customer_001_checking_account" />
+		<constructor-arg name="card"
+			ref="customer_001_saving_account_debitCard" />
+		<constructor-arg name="startTime"
+			value="#{CommonsUtils.getCalendar(02, 18, 2017, 12, 33, 0, 1)}" />
+		<constructor-arg name="amount" value="500.0" />
+	</bean>
+	<bean id="atm_PNC_001_transferTransaction" class="com.facilities.model.service.TransferTransaction"
+		>
+		<constructor-arg name="account" ref="customer_001_checking_account" />
+		<constructor-arg name="card"
+			ref="customer_001_saving_account_debitCard" />
+		<constructor-arg name="startTime"
+			value="#{CommonsUtils.getCalendar(02, 18, 2017, 12, 50, 0, 1)}" />
+		<constructor-arg name="amount" value="300.0" />
+		<constructor-arg name="transferTo" ref="customer_001_saving_account" />
+	</bean>
+	<!-- We create all the maintenance Orders -->
+	<bean id="atm_PNC_001_diagnosticOrder" class="com.facilities.model.maintenance.Diagnostic"
+		>
+		<constructor-arg name="atm" ref="atm_PNC_001" />
+		<constructor-arg name="description" value="First Diagnostic Maintenenance" />
+	</bean>
+	<bean id="atm_PNC_001_replenishOrder" class="com.facilities.model.maintenance.Replenish"
+		>
+		<constructor-arg name="atm" ref="atm_PNC_001" />
+		<constructor-arg name="description" value="First Replenish Maintenenance" />
+		<constructor-arg name="amountToReplenish" value="100000.0" />
+	</bean>
+	<bean id="atm_PNC_001_repairOrder" class="com.facilities.model.maintenance.Repair"
+		>
+		<constructor-arg name="atm" ref="atm_PNC_001" />
+		<constructor-arg name="description" value="First Repair Maintenenance" />
+	</bean>
+	<bean id="atm_PNC_001_upgradeOrder" class="com.facilities.model.maintenance.Upgrade"
+		>
+		<constructor-arg name="atm" ref="atm_PNC_001" />
+		<constructor-arg name="description" value="First Upgrade Maintenenance" />
+	</bean>
+	<!-- We create the list with the requests -->
+	<bean id="listMaintenanceRequest" class="java.util.ArrayList" >
+		<constructor-arg>
+			<list>
+				<ref bean="atm_PNC_001_diagnosticOrder" />
+				<ref bean="atm_PNC_001_replenishOrder" />
+				<ref bean="atm_PNC_001_repairOrder" />
+				<ref bean="atm_PNC_001_upgradeOrder" />
+			</list>
+		</constructor-arg>
+	</bean>
+	<!-- We create the client Interface Objects -->
+	<bean id="facilityUserInterface"
+		class="com.facilities.client.interfacesImpl.FacilityUserInterfaceImpl"
+		 />
+
+	<bean id="facilityClientInterface"
+		class="com.facilities.client.interfacesImpl.FacilityClientInterfaceImpl"
+		 />
+
+	<bean id="facilityMaintenanceInterface"
+		class="com.facilities.client.interfacesImpl.FacilityMaintenanceInterfaceImpl"
+		 />
+		
 </beans>
