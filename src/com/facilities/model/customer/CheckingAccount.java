@@ -1,7 +1,12 @@
 package com.facilities.model.customer;
 
-public class CheckingAccount implements Account {
+import java.util.ArrayList;
 
+import com.facilities.client.observer.Observer;
+import com.facilities.client.observer.Subject;
+
+public class CheckingAccount implements Account, Subject {
+	private ArrayList<Observer> observers = new ArrayList<Observer>();
 	private Customer owner;
 	private String type;
 	private String accountNumber;
@@ -49,13 +54,35 @@ public class CheckingAccount implements Account {
 	@Override
 	public boolean credit(Double ammount) {
 		this.setBalance(this.getBalance() + ammount);
+		notifyObservers(ammount, "credit");
 		return true;
 	}
 
 	@Override
 	public boolean debit(Double ammount) {
 		this.setBalance(this.getBalance() - ammount);
+		notifyObservers(ammount, "debit");
 		return true;
+	}
+
+	@Override
+	public void registerObserver(Observer observer) {
+		observers.add(observer);
+
+	}
+
+	@Override
+	public void removeObserver(Observer observer) {
+		observers.remove(observer);
+
+	}
+
+	@Override
+	public void notifyObservers(Double ammount, String operationType) {
+		for (Observer ob : observers) {
+			ob.update(ammount, this, operationType);
+		}
+
 	}
 
 }
