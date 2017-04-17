@@ -9,21 +9,15 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.facilities.client.bridge.EmailAlertMessage;
-import com.facilities.client.bridge.SMSAlertMessage;
 import com.facilities.client.interfaces.FacilityUserInterface;
 import com.facilities.client.interfacesImpl.FacilityClientInterfaceImpl;
 import com.facilities.client.interfacesImpl.FacilityUserInterfaceImpl;
-import com.facilities.client.observer.DepositAlert;
-import com.facilities.client.observer.Observer;
-import com.facilities.client.observer.Subject;
 import com.facilities.commons.utils.BankLoader;
 import com.facilities.commons.utils.CommonsUtils;
 import com.facilities.model.atm.ATM;
 import com.facilities.model.atm.Bank;
 import com.facilities.model.customer.Account;
 import com.facilities.model.customer.Card;
-import com.facilities.model.customer.CheckingAccount;
 import com.facilities.model.service.ATMTransaction;
 import com.facilities.model.service.DepositTransaction;
 import com.facilities.model.service.WithdrawlTransaction;
@@ -33,8 +27,6 @@ public class FacilityUserInterfaceImplTest {
 	private FacilityUserInterface facilityUserInterface;
 	ApplicationContext context;
 	Bank pncBank;
-	private EmailAlertMessage emailMessage;
-	private SMSAlertMessage SMSMessage;
 
 	@Before
 	public void initialize() {
@@ -44,11 +36,6 @@ public class FacilityUserInterfaceImplTest {
 		pncBank = BankLoader.getBankPNC(context);
 		BankLoader.loadTransactionsPNC(pncBank, context,
 				(FacilityClientInterfaceImpl) context.getBean("facilityClientInterface"));
-		// this will add the observers
-		Subject checkingAccount = (CheckingAccount) context.getBean("customer_001_checking_account");
-		emailMessage = new EmailAlertMessage();
-		Observer depositAlert = new DepositAlert(emailMessage);
-		checkingAccount.registerObserver(depositAlert);
 	}
 
 	@Test

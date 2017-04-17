@@ -48,51 +48,27 @@ public class FacilityPatternsUseCase {
 		Subject checkingAccount = (CheckingAccount) context.getBean("customer_001_checking_account");
 		emailMessage = new EmailAlertMessage();
 		SMSMessage = new SMSAlertMessage();
-		Observer depositAlert = new DepositAlert(emailMessage);
-		Observer withdrawAlert = new WithdrawAlert(SMSMessage);
+		Observer depositAlert = new DepositAlert();
+		Observer withdrawAlert = new WithdrawAlert();
 		checkingAccount.registerObserver(depositAlert);
 		checkingAccount.registerObserver(withdrawAlert);
 	}
 
 	@Test
-	public void observerPatternTestDepositListener() {
-		System.out.println("@Testing Observer Pattern for Deposit");
+	public void patternTestDeposit() {
+		System.out.println("@Testing Observer and Bridge Pattern for Deposit");
 		ATM atmPNC_001 = pncBank.getAtms().get(0);
 		Card debitCard = pncBank.getDebitCards().get(0);
 		Account checkingAccount = debitCard.getAccounts().get(0);
-		ATMTransaction withdrawFromAccount = new DepositTransaction(checkingAccount, debitCard,
+		ATMTransaction depositAccount = new DepositTransaction(checkingAccount, debitCard,
 				CommonsUtils.getCalendar(02, 18, 2017, 13, 20, 0, 0), 10.0);
-		assertEquals(facilityUserInterface.assignFacilityToUse(atmPNC_001, withdrawFromAccount), true);
+		assertEquals(facilityUserInterface.assignFacilityToUse(atmPNC_001, depositAccount), true);
 
 	}
 	
 	@Test
-	public void observerPatternTestWithdrawalListener() {
-		System.out.println("@Testing Observer Pattern for Withdrawal");
-		ATM atmPNC_001 = pncBank.getAtms().get(0);
-		Card debitCard = pncBank.getDebitCards().get(0);
-		Account checkingAccount = debitCard.getAccounts().get(0);
-		ATMTransaction withdrawFromAccount = new WithdrawlTransaction(checkingAccount, debitCard,
-				CommonsUtils.getCalendar(02, 18, 2017, 13, 20, 0, 0), 20.0);
-		assertEquals(facilityUserInterface.assignFacilityToUse(atmPNC_001, withdrawFromAccount), true);
-
-	}
-	
-	@Test
-	public void bridgePatternTestEmailAlert() {
-		System.out.println("@Testing Bridge Pattern for Email Alert");
-		ATM atmPNC_001 = pncBank.getAtms().get(0);
-		Card debitCard = pncBank.getDebitCards().get(0);
-		Account checkingAccount = debitCard.getAccounts().get(0);
-		ATMTransaction withdrawFromAccount = new DepositTransaction(checkingAccount, debitCard,
-				CommonsUtils.getCalendar(02, 18, 2017, 13, 20, 0, 0), 10.0);
-		assertEquals(facilityUserInterface.assignFacilityToUse(atmPNC_001, withdrawFromAccount), true);
-
-	}
-	
-	@Test
-	public void bridgePatternTestSMSAlert() {
-		System.out.println("@Testing Bridge Pattern for SMS Alert");
+	public void patternTestWithdrawal() {
+		System.out.println("@Testing Observer and Bridge Pattern for Withdrawal");
 		ATM atmPNC_001 = pncBank.getAtms().get(0);
 		Card debitCard = pncBank.getDebitCards().get(0);
 		Account checkingAccount = debitCard.getAccounts().get(0);
