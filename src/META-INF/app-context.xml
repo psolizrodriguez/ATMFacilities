@@ -336,7 +336,12 @@
 		class="com.facilities.client.interfacesImpl.FacilityClientInterfaceImpl" />
 
 	<bean id="facilityMaintenanceInterface"
-		class="com.facilities.client.interfacesImpl.FacilityMaintenanceInterfaceImpl" />
-
+		class="com.facilities.client.interfacesImpl.FacilityMaintenanceInterfaceImpl" />	
+		
+	<bean id="emailMessage"
+		class="com.facilities.client.bridge.EmailAlertMessage" />
+		
+	<bean id="SMSMessage"
+		class="com.facilities.client.bridge.SMSAlertMessage" />
 
 </beans>

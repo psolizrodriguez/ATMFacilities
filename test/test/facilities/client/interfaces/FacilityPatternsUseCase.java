@@ -7,6 +7,8 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.facilities.client.bridge.EmailAlertMessage;
+import com.facilities.client.bridge.SMSAlertMessage;
 import com.facilities.client.interfaces.FacilityUserInterface;
 import com.facilities.client.interfacesImpl.FacilityClientInterfaceImpl;
 import com.facilities.client.interfacesImpl.FacilityUserInterfaceImpl;
@@ -28,6 +30,9 @@ import com.facilities.model.service.WithdrawlTransaction;
 public class FacilityPatternsUseCase {
 
 	private FacilityUserInterface facilityUserInterface;
+	private EmailAlertMessage emailMessage;
+	private SMSAlertMessage SMSMessage;
+
 	ApplicationContext context;
 	Bank pncBank;
 
@@ -41,8 +46,10 @@ public class FacilityPatternsUseCase {
 				(FacilityClientInterfaceImpl) context.getBean("facilityClientInterface"));
 		// this will add the observers
 		Subject checkingAccount = (CheckingAccount) context.getBean("customer_001_checking_account");
-		Observer depositAlert = new DepositAlert();
-		Observer withdrawAlert = new WithdrawAlert();
+		emailMessage = new EmailAlertMessage();
+		SMSMessage = new SMSAlertMessage();
+		Observer depositAlert = new DepositAlert(emailMessage);
+		Observer withdrawAlert = new WithdrawAlert(SMSMessage);
 		checkingAccount.registerObserver(depositAlert);
 		checkingAccount.registerObserver(withdrawAlert);
 	}
@@ -62,6 +69,30 @@ public class FacilityPatternsUseCase {
 	@Test
 	public void observerPatternTestWithdrawalListener() {
 		System.out.println("@Testing Observer Pattern for Withdrawal");
+		ATM atmPNC_001 = pncBank.getAtms().get(0);
+		Card debitCard = pncBank.getDebitCards().get(0);
+		Account checkingAccount = debitCard.getAccounts().get(0);
+		ATMTransaction withdrawFromAccount = new WithdrawlTransaction(checkingAccount, debitCard,
+				CommonsUtils.getCalendar(02, 18, 2017, 13, 20, 0, 0), 20.0);
+		assertEquals(facilityUserInterface.assignFacilityToUse(atmPNC_001, withdrawFromAccount), true);
+
+	}
+	
+	@Test
+	public void bridgePatternTestEmailAlert() {
+		System.out.println("@Testing Bridge Pattern for Email Alert");
+		ATM atmPNC_001 = pncBank.getAtms().get(0);
+		Card debitCard = pncBank.getDebitCards().get(0);
+		Account checkingAccount = debitCard.getAccounts().get(0);
+		ATMTransaction withdrawFromAccount = new DepositTransaction(checkingAccount, debitCard,
+				CommonsUtils.getCalendar(02, 18, 2017, 13, 20, 0, 0), 10.0);
+		assertEquals(facilityUserInterface.assignFacilityToUse(atmPNC_001, withdrawFromAccount), true);
+
+	}
+	
+	@Test
+	public void bridgePatternTestSMSAlert() {
+		System.out.println("@Testing Bridge Pattern for SMS Alert");
 		ATM atmPNC_001 = pncBank.getAtms().get(0);
 		Card debitCard = pncBank.getDebitCards().get(0);
 		Account checkingAccount = debitCard.getAccounts().get(0);

@@ -1,8 +1,14 @@
 package com.facilities.client.observer;
 
+import com.facilities.client.bridge.AlertMessage;
 import com.facilities.model.customer.Account;
 
-public class WithdrawAlert implements Observer {
+public class WithdrawAlert extends Observer {
+	
+	public WithdrawAlert(AlertMessage message){
+		super(message);
+	}
+	
 	@Override
 	public void update(Double ammount, Account account, String operationType) {
 		if (operationType.equals("debit")) {
@@ -13,6 +19,10 @@ public class WithdrawAlert implements Observer {
 			System.out.println("for the ammount of : " + ammount);
 			System.out.println("leaving a total balance of : " + account.getBalance());
 			System.out.println("*************************This is an Alert of a Withdrawal************************");
+			System.out.println("********" + message);
+			message.sendAlert(account.getOwner(), operationType);	
+
 		}
 	}
+
 }

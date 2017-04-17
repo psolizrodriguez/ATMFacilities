@@ -9,6 +9,8 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.facilities.client.bridge.EmailAlertMessage;
+import com.facilities.client.bridge.SMSAlertMessage;
 import com.facilities.client.interfaces.FacilityUserInterface;
 import com.facilities.client.interfacesImpl.FacilityClientInterfaceImpl;
 import com.facilities.client.interfacesImpl.FacilityUserInterfaceImpl;
@@ -31,6 +33,8 @@ public class FacilityUserInterfaceImplTest {
 	private FacilityUserInterface facilityUserInterface;
 	ApplicationContext context;
 	Bank pncBank;
+	private EmailAlertMessage emailMessage;
+	private SMSAlertMessage SMSMessage;
 
 	@Before
 	public void initialize() {
@@ -42,7 +46,8 @@ public class FacilityUserInterfaceImplTest {
 				(FacilityClientInterfaceImpl) context.getBean("facilityClientInterface"));
 		// this will add the observers
 		Subject checkingAccount = (CheckingAccount) context.getBean("customer_001_checking_account");
-		Observer depositAlert = new DepositAlert();
+		emailMessage = new EmailAlertMessage();
+		Observer depositAlert = new DepositAlert(emailMessage);
 		checkingAccount.registerObserver(depositAlert);
 	}
 
